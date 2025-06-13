@@ -15,6 +15,19 @@ body{
   background-size: cover;
   background-position: center;
 }
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
 .wrapper{
   width: 420px;
   background: transparent;
@@ -23,19 +36,22 @@ body{
   color: #fff;
   border-radius: 12px;
   padding: 30px 40px;
+  animation: fadeIn 1s ease forwards;
 }
 .wrapper h1{
   font-size: 36px;
   text-align: center;
 }
-.wrapper .input-box{
+
+.wrapper .input-field{
   position: relative;
   width: 100%;
   height: 50px;
-  
   margin: 30px 0;
+  animation: fadeIn 1s ease forwards;
 }
-.input-box input{
+
+.input-field input{
   width: 100%;
   height: 100%;
   background: transparent;
@@ -44,13 +60,14 @@ body{
   border: 2px solid rgba(255, 255, 255, .2);
   border-radius: 15px;
   font-size: 16px;
+  font-weight: 500;
   color: #fff;
   padding: 20px 45px 20px 20px;
 }
-.input-box input::placeholder{
-  color: #fff;
+.input-field input::placeholder{
 }
-.input-box i{
+
+.input-field i{
   position: absolute;
   right: 20px;
   top: 30%;
@@ -62,6 +79,7 @@ body{
   display: flex;
   justify-content: space-between;
   font-size: 14.5px;
+  font-weight: 500;
   margin: -15px 0 15px;
 }
 .remember-forgot label input{
@@ -77,8 +95,16 @@ body{
 .remember-forgot a:hover{
   text-decoration: underline;
 }
-.wrapper .btn{
+
+.submit-container {
   width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper .btn{
+  align-self: center;
+  width: 80%;
   height: 45px;
   background: #fff;
   border: none;
@@ -86,21 +112,16 @@ body{
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, .1);
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
   color: #333;
-  font-weight: 600;
+  font-weight: 700;
+  box-shadow: 0px 0px 40px 20px rgba(255, 255, 255, 0.2);
+  transition: .2s;
+  animation: fadeIn 1s ease forwards;
 }
-.wrapper .register-link{
-  font-size: 14.5px;
-  text-align: center;
-  margin: 20px 0 15px;
 
-}
-.register-link p a{
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-}
-.register-link p a:hover{
-  text-decoration: underline;
+.wrapper .btn:hover {
+  box-shadow: 0px 0px 80px 30px rgba(255, 255, 255, 0.2);
+  width: 100%;
+  font-size: 19px;
 }
