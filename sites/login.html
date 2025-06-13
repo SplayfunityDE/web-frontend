@@ -2,20 +2,35 @@
 <html lang="de">
 
 <head>
-    <link rel="stylesheet" href="/style/login.css">
-    <link rel="icon" href="/images/icon.png">
-    <meta charset="UTF-8">
-    <title>LOGIN - SPLΛYFUNITY</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPLΛYFUNITY - Login</title>
+  <link rel="stylesheet" href="/style/login.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
-    <div class="mid">
-        <div class="input-field">
-            <input type="text" class="input" placeholder="Benutzername" required>
-            <input type="password" class="input" placeholder="Passwort" required>
-            <input type="submit" class="submit" value="Anmelden">
-        </div>
-    </div>
+  <div class="wrapper">
+    <form action="">
+      <h1>Login</h1>
+      <div class="input-box">
+        <input type="text" placeholder="Username" required>
+        <i class='bx bxs-user'></i>
+      </div>
+      <div class="input-box">
+        <input type="password" placeholder="Password" required>
+        <i class='bx bxs-lock-alt' ></i>
+      </div>
+      <div class="remember-forgot">
+        <label><input type="checkbox">Remember Me</label>
+        <a href="#">Forgot Password</a>
+      </div>
+      <button type="submit" class="btn">LOGIN</button>
+      <div class="register-link">
+        <p>Dont have an account? <a href="#">Register</a></p>
+      </div>
+    </form>
+  </div>
 </body>
 
 </html>
