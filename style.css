@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    background-image: url(images/background.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    transition: opacity 1s ease
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+.mid {
+    color: white;
+    font-family: "Barlow", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    flex-direction: column;
+    height: 80vh
+}
+
+
+.main-text {
+    font-size: 8em;
+    font-weight: 900;
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate, fadeIn 1s ease-out forwards;
+    letter-spacing: -13px;
+}
+
+.main-text span {
+    display: inline;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@-webkit-keyframes glow {
+    from {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    to {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.2), 0 0 30px rgba(224, 222, 222, 0.3);
+    }
+}
+
+.container {
+    width: 480px;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    margin: 6px;
+}
+
+::-webkit-input-placeholder {
+    color: #fff;
+}
+
+.navbar {
+    display: flex;
+    justify-content: right;
+}
+
+.login-container {
+    width: 200px;
+    margin: 15px;
+    justify-content: center;
+}
+
+.login {
+    border: none;
+    border-radius: 15px;
+    font-family: "Barlow", sans-serif;
+    font-size: 15px;
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.7);
+    height: 35px;
+    outline: none;
+    width: 80%;
+    background: white;
+    cursor: pointer;
+    transition: .3s;
+    box-shadow: 0px 0px 30px 5px rgba(255, 255, 255, 0.2);
+    opacity: 1;
+    animation-delay: 0.7s;
+    text-align: center;
+    animation: fadeIn 2s ease forwards;
+    align-self: center;
+}
+
+.login:hover {
+    box-shadow: 0px 0px 60px 15px rgba(255, 255, 255, 0.2);
+    width: 100%;
+    font-size: 16px;
+}
+
+.submit {
+    border: none;
+    border-radius: 15px;
+    font-family: "Barlow", sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.7);
+    height: 50px;
+    outline: none;
+    width: 80%;
+    align-self: center;
+    background: white;
+    cursor: pointer;
+    transition: .3s;
+    box-shadow: 0px 0px 40px 20px rgba(255, 255, 255, 0.2);
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 0.7s;
+}
+
+.submit:hover {
+    box-shadow: 0px 0px 80px 30px rgba(255, 255, 255, 0.2);
+    width: 100%;
+    font-size: 22px;
+}
+
+.rechtliches {
+    font-family: "Barlow", sans-serif;
+    color: rgba(222, 222, 222);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 70px;
+    animation: fadeIn 2s ease-out forwards;
+}
+
+.rechtliches>div {
+    position: relative;
+    cursor: pointer;
+    animation: glow 1s ease-in-out infinite alternate;
+}
+
+.rechtliches>div::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    /* Stärke der Unterstreichung */
+    bottom: -5px;
+    left: 0;
+    background-color: rgba(222, 222, 222);
+    transition: width 0.3s ease;
+}
+
+.rechtliches>div:hover::after {
+    width: 100%;
+}
+
+.rechtliches>div a {
+    color: rgba(222, 222, 222);
+    text-decoration: none;
+}
