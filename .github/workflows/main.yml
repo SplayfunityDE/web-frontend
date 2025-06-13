@@ -1,0 +1,31 @@
+name: Deploy to Staging server
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-and-deploy:
+
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - uses: actions/checkout@v3
+        
+    - name: Install SSH Key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        known_hosts: unnecessary
+        
+    - name: Adding Known Hosts
+      run: ssh-keyscan -p ${{ secrets.PORT }} -H ${{ secrets.HOST }}  >> ~/.ssh/known_hosts
+      
+    - name: Deploy with rsync
+      run: rsync -avz --delete . ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/var/www/splayfer.de/public_html
