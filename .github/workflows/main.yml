@@ -34,8 +34,7 @@ jobs:
       run: |
         curl https://api.cloudflare.com/client/v4/zones/${{ vars.CLOUDFLARE_ZONE_ID }}/purge_cache \
         -H 'Content-Type: application/json' \
-        -H "X-Auth-Email: ${{ vars.CLOUDFLARE_EMAIL }}" \
-        -H "X-Auth-Key: ${{ secrets.CLOUDFLARE_API_KEY }}" \
+        -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_KEY }}" \
         -d '{
           "tags": [
             "a-cache-tag",
