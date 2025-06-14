@@ -11,7 +11,7 @@
 
     --body-color: #E4E9F7;
     --sidebar-color: #FFF;
-    --primary-color: #695CFE;
+    --primary-color: #3573a5;
     --primary-color-light: #F6F5FF;
     --toggle-color: #DDD;
     --text-color: #707070;
@@ -167,6 +167,10 @@ body.dark .sidebar header .toggle {
     transition: var(--tran-05);
 }
 
+body.dark .search-box input {
+    color: var(--text-color);
+}
+
 .sidebar li a {
     height: 100%;
     width: 100%;
@@ -201,6 +205,7 @@ body.dark .sidebar li a:hover .text {
 .menu-bar .mode {
     position: relative;
     background: var(--primary-color-light);
+    border-radius: 6px;
 }
 
 .menu-bar .mode .moon-sun {
@@ -237,7 +242,6 @@ body.dark .menu-bar .mode i.moon {
     min-width: 60px;
     cursor: pointer;
     border-radius: 6px;
-    background: var(--primary-color-light);
     transition: var(--tran-05);
 }
 
@@ -269,8 +273,8 @@ body.dark .switch::before {
 .home {
     position: relative;
     height: 100vh;
-    left: 88px;
-    width: calc(100% - 88px);
+    left: 250px;
+    width: calc(100% - 250px);
     background: var(--body-color);
     transition: var(--tran-05);
 }

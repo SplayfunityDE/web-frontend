@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <nav class="sidebar close">
+    <nav class="sidebar">
         <header>
             <div class="image-text">
                 <span class="image">
@@ -34,37 +34,37 @@
                     <input type="search" placeholder="Suchen">
                 </li>
                 <ul class="menu-links">
-                    <li class="nav-link">
+                    <li class="nav-link" data-page="dash">
                         <a href="#">
                             <i class='bx bx-home-alt icon'></i>
                             <span class="text nav-text">Dashboard</span>
                         </a>
                     </li>
-                    <li class="nav-link">
+                    <li class="nav-link" data-page="tickets">
                         <a href="#">
                             <i class='bx bx-ticket icon'></i>
                             <span class="text nav-text">Tickets</span>
                         </a>
                     </li>
-                    <li class="nav-link">
+                    <li class="nav-link" data-page="offen">
                         <a href="#">
                             <i class='bx bx-envelope-open icon'></i>
                             <span class="text nav-text">Offen</span>
                         </a>
                     </li>
-                    <li class="nav-link">
+                    <li class="nav-link" data-page="bearbeitung">
                         <a href="#">
                             <i class='bx  bx-pencil icon'></i>
                             <span class="text nav-text">In Bearbeitung</span>
                         </a>
                     </li>
-                    <li class="nav-link">
+                    <li class="nav-link" data-page="geschlossen">
                         <a href="#">
                             <i class='bx  bx-lock icon'></i>
                             <span class="text nav-text">Geschlossen</span>
                         </a>
                     </li>
-                    <li class="nav-link">
+                    <li class="nav-link" data-page="archiviert">
                         <a href="#">
                             <i class='bx  bx-archive icon'></i>
                             <span class="text nav-text">Archiviert</span>
@@ -96,9 +96,8 @@
             </div>
         </div>
     </nav>
-
     <section class="home">
-        <div class="text">Dashboard</div>
+
     </section>
 
     <script src="/scripts/ticket/script.js"></script>
