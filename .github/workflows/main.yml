@@ -29,3 +29,15 @@ jobs:
       
     - name: Deploy with rsync
       run: rsync -avz --delete . ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/var/www/splayfer.de/public_html
+
+    - name: Purge Cloudflare Cache
+      run: curl https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache \
+            -H 'Content-Type: application/json' \
+            -H "X-Auth-Email: ${{ vars.CLOUDFLARE_EMAIL }}" \
+            -H "X-Auth-Key: ${{ secrets.CLOUDFLARE_API_KEY }}" \
+            -d '{
+              "tags": [
+                "a-cache-tag",
+                "another-cache-tag"
+              ]
+            }'
