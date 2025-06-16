@@ -5,22 +5,6 @@
     font-family: "Barlow", sans-serif;
 }
 
-/* Preloader-Design */
-#preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    color: #000000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    font-size: 1.5em;
-    z-index: 10000;
-}
-
 /* Versteckter Content */
 #content {
     display: none;
