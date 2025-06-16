@@ -5,6 +5,27 @@
     font-family: "Barlow", sans-serif;
 }
 
+/* Preloader-Design */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff;
+    color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 1.5em;
+    z-index: 10000;
+}
+
+/* Versteckter Content */
+#content {
+    display: none;
+}
 
 body {
     background-image: url(images/background.png);
@@ -13,6 +34,7 @@ body {
     background-attachment: fixed;
     background-size: cover;
     transition: opacity 1s ease;
+    overflow: hidden;
 }
 
 .mid {
