@@ -64,16 +64,8 @@
             document.getElementById('preloader').style.display = 'none';
             // Inhalt anzeigen
             document.getElementById('content').style.display = 'block';
-            // Scrollen wieder aktivieren
-            document.body.style.overflow = 'auto';
             // Hintergrund zurücksetzen
             document.body.style.backgroundImage = "url(/images/background.png)"; // Hier kannst du auch eine feste Farbe oder Bild zuweisen
-        });
-
-        // Vor dem Laden
-        window.addEventListener('beforeunload', function () {
-            // Hintergrund auf eine andere Farbe setzen, während die Seite lädt
-            document.body.style.background = '#f0f0f0'; // Beispiel für eine graue Farbe
         });
     </script>
 </body>
