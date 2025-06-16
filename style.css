@@ -27,7 +27,7 @@
 }
 
 body {
-    background-color: green;
+    background-image: url(/images/background.webp);
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
