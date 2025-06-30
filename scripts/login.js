@@ -7,7 +7,7 @@ async function handleLogin(event) {
 
 async function fetchCredentials(username, value) {
     try {
-        const response = (await fetch("http://116.203.79.193:8080/api/authentication/accounts/hash", {
+        const response = (await fetch("https://api.splayfer.de/api/authentication/accounts/hash", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
