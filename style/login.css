@@ -104,13 +104,13 @@ body {
 }
 
 .submit-container {
-  width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .wrapper .btn {
-  align-self: center;
   width: 80%;
   height: 45px;
   background: #fff;
@@ -122,13 +122,99 @@ body {
   font-size: 18px;
   color: #333;
   font-weight: 700;
+  position: relative;
+  /* Damit der Loader absolut im Button positioniert werden kann */
+  overflow: hidden;
+  /* Verhindert, dass der Loader über den Button hinausgeht */
   box-shadow: 0px 0px 40px 20px rgba(255, 255, 255, 0.2);
   transition: .2s;
   animation: fadeIn 1s ease forwards;
+  display: flex;
+  /* Verwendet Flexbox */
+  justify-content: center;
+  /* Horizontale Zentrierung */
+  align-items: center;
+  /* Vertikale Zentrierung */
 }
 
 .wrapper .btn:hover {
   box-shadow: 0px 0px 80px 30px rgba(255, 255, 255, 0.2);
   width: 100%;
   font-size: 19px;
+}
+
+.btntext {
+  transition: 0.3s;
+}
+
+.error {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: rgb(209, 71, 63);
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  transition: 0.3s;
+  opacity: 0;
+  position: absolute;
+  width: 25px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 4px solid #333;
+  animation:
+    l20-1 0.8s infinite linear alternate,
+    l20-2 1.6s infinite linear;
+}
+
+@keyframes l20-1 {
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%)
+  }
+
+  12.5% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 0%, 100% 0%, 100% 0%)
+  }
+
+  25% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 100%, 100% 100%, 100% 100%)
+  }
+
+  50% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 100%)
+  }
+
+  62.5% {
+    clip-path: polygon(50% 50%, 100% 0, 100% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 100%)
+  }
+
+  75% {
+    clip-path: polygon(50% 50%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 50% 100%, 0% 100%)
+  }
+
+  100% {
+    clip-path: polygon(50% 50%, 50% 100%, 50% 100%, 50% 100%, 50% 100%, 50% 100%, 0% 100%)
+  }
+}
+
+@keyframes l20-2 {
+  0% {
+    transform: scaleY(1) rotate(0deg)
+  }
+
+  49.99% {
+    transform: scaleY(1) rotate(135deg)
+  }
+
+  50% {
+    transform: scaleY(-1) rotate(0deg)
+  }
+
+  100% {
+    transform: scaleY(-1) rotate(-135deg)
+  }
 }
