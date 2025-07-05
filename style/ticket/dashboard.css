@@ -279,14 +279,30 @@ body.dark .switch::before {
     transition: var(--tran-05);
 }
 
-.home .text {
+.home .headline {
     font-size: 30px;
     font-weight: 500;
     color: var(--text-color);
+}
+
+.home iframe {
     padding: 8px 40px;
 }
 
 .sidebar.close~.home {
     left: 88px;
     width: calc(100% - 88px);
+}
+
+iframe {
+    position: absolute;
+    /* Absolut positionieren, um es vollständig auszudehnen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* Breite auf 100% setzen */
+    height: 100%;
+    /* Höhe auf 100% setzen */
+    border: none;
+    /* Keine Border */
 }

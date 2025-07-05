@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    font-family: "Barlow", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+    --primary-color: #3573a5;
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --text-color: #707070;
+
+    --tran-02: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.5s ease;
+}
+
+.headline {
+    font-size: 40px;
+    font-weight: 500;
+    color: var(--text-color);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+thead {}
+
+tfoot {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+tbody {
+    background-color: none;
+}
+
+table {
+    border-collapse: collapse;
+    border: none;
+    font-family: sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-align: left;
+    width: 100%;
+}
+
+caption {
+    caption-side: bottom;
+    padding: 10px;
+}
+
+th,
+td {
+    border: 1px solid rgb(160 160 160);
+    border-right: none;
+    border-left: none;
+    padding: 8px 10px;
+}
+
+th {
+    border: none;
+}
+
+td {
+    text-align: left;
+}
+
+caption {
+    text-align: right;
+}
+
+td:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+tr:hover {
+    background-color: var(--primary-color-light);
+}
+
+.search-box {
+    display: flex;
+    flex-direction: row;
+    background: var(--primary-color-light);
+    border-radius: 6px;
+    transition: var(--tran-05);
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+.search-box input {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    background: var(--primary-color-light);
+    transition: var(--tran-05);
+}
+
+.search-box i {
+    align-self: center;
+    margin: 10px;
+}
