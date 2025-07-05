@@ -31,7 +31,7 @@ body {
 }
 
 .main-text {
-    font-size: clamp(4rem, 8vw, 8rem);
+    font-size: clamp(3rem, 14vw, 8rem);
     font-weight: 900;
     -webkit-animation: glow 1s ease-in-out infinite alternate;
     -moz-animation: glow 1s ease-in-out infinite alternate;
