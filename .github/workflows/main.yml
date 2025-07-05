@@ -36,7 +36,5 @@ jobs:
         -H 'Content-Type: application/json' \
         -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_KEY }}" \
         -d '{
-          "tags": [
-            "purge_everything": true
-          ]
+          "purge_everything": true
         }'
