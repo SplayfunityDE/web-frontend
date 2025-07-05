@@ -26,23 +26,27 @@ async function fetchCredentials(username, value) {
                 username: username,
                 value: value,
             })
-        }));
-        if (await response.text() == "true") {
-            //Weiterleitung
-            window.location.href = "/sites/ticket/dashboard.html";
-        } else {
-            const fields = document.querySelectorAll(".input-field input");
-            console.log(fields);
-            fields.forEach(field => {
-                field.style.border = "2px solid rgb(209, 71, 63, .5)";
-            });
-            buttonSpinner.style.opacity = "0";
-            buttonText.style.opacity = "1";
-            errorField.innerHTML = "Ungültige Anmeldeinformationen"
-            user = false;
-            pw = false;
-        }
+        })
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                const token = data.token;
+                localStorage.setItem("jwt", token);
+                window.location.href = '/sites/ticket/dashboard.html';
+            })
+        );
     } catch (error) {
+        const fields = document.querySelectorAll(".input-field input");
+        console.log(fields);
+        fields.forEach(field => {
+            field.style.border = "2px solid rgb(209, 71, 63, .5)";
+        });
+        buttonSpinner.style.opacity = "0";
+        buttonText.style.opacity = "1";
+        errorField.innerHTML = "Ungültige Anmeldeinformationen"
+        user = false;
+        pw = false;
         console.error(error);
     }
 }
