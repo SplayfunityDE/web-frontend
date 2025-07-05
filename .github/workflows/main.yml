@@ -37,7 +37,6 @@ jobs:
         -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_KEY }}" \
         -d '{
           "tags": [
-            "a-cache-tag",
-            "another-cache-tag"
+            "purge_everything": true
           ]
         }'
