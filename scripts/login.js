@@ -17,7 +17,7 @@ async function fetchCredentials(username, value) {
     const buttonText = document.querySelector(".btntext");
     const errorField = document.querySelector(".error");
     try {
-        const response = (await fetch("https://api.splayfer.de/api/authentication/accounts/hash", {
+        const response = (await fetch("https://api.splayfer.de/authentication/accounts/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
