@@ -36,6 +36,16 @@ navLinks.forEach(link => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    const token = localStorage.getItem('jwt');
+    if (!token) {
+        window.location.href = '/sites/ticket/login.html';
+    } else {
+        // Optional: Token-Inhalt anzeigen
+        const user = parseJwt(token).sub;
+        document.getElementById('username').textContent = user;
+    }
+
     const homeSection = document.querySelector(".home");
 
     fetch("/sites/ticket/dash.html")
