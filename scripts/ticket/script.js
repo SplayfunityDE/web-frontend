@@ -40,10 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem('jwt');
     if (!token) {
         window.location.href = '/sites/login.html';
-    } else {
-        // Optional: Token-Inhalt anzeigen
-        const user = parseJwt(token).sub;
-        document.getElementById('username').textContent = user;
     }
 });
 
