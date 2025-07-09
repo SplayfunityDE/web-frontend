@@ -35,6 +35,13 @@ navLinks.forEach(link => {
     });
 });
 
+const logoutLink = document.querySelector(".nav-bottom-link");
+
+logoutLink.addEventListener("click", async () => {
+    localStorage.removeItem("jwt");
+    window.location.href = '/sites/login.html';
+});
+
 document.addEventListener("DOMContentLoaded", () => {
 
     const token = localStorage.getItem('jwt');
