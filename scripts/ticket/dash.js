@@ -29,11 +29,11 @@ async function fetchTable() {
 
             //kanal
             var cell = row.insertCell();
-            cell.textContent = element.channel;
+            cell.textContent = "# " + element.channelTxt;
 
             //nutzer
             var cell = row.insertCell();
-            cell.textContent = element.creator;
+            cell.textContent = element.creatorTxt;
 
             //erstelldatum
             var cell = row.insertCell();
@@ -58,12 +58,12 @@ async function fetchTable() {
 
             //bearbeiter
             var cell = row.insertCell();
-            cell.textContent = element.supporter;
+            cell.textContent = element.supporterTxt;
         });
 
         table.style.opacity = "1";
+        document.querySelector("table caption").style.opacity = "1";
         document.querySelector(".loader").style.opacity = "0";
-
     } catch (error) {
         console.error("Fehler beim Laden der Tabelle:", error);
     }
