@@ -35,6 +35,7 @@ async function fetchTable() {
             if (i > (currentPage * maxPerPage) - maxPerPage && i <= currentPage * maxPerPage) {
 
                 var row = tbody.insertRow();
+                row.setAttribute("data-id", element.post);
 
                 //kanal
                 var cell = row.insertCell();
@@ -104,6 +105,13 @@ async function fetchTable() {
                 currentPage -= 1;
                 reloadTable();
             });
+
+        const dataRows = document.querySelectorAll("tbody td");
+        dataRows.forEach(element => {
+            element.addEventListener("click", async () => {
+                window.open("https://discord.com/channels/873506353551925308/" + element.parentElement.getAttribute("data-id"));
+            });
+        });
 
     } catch (error) {
         console.error("Fehler beim Laden der Tabelle:", error);
