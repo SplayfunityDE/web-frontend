@@ -1,5 +1,5 @@
 var currentPage = 1;
-const maxPerPage = 5;
+const maxPerPage = 15;
 const leftArrowTxt = "<i class='bx bx-fw  bxs-arrow-left-stroke'></i>";
 const rightArrowTxt = "<i class='bx bx-fw  bxs-arrow-right-stroke'></i>";
 
