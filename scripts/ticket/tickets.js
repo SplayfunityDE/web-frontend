@@ -31,6 +31,19 @@ async function fetchTable() {
         var count = 0;
 
         data.forEach(element => {
+            const field = document.getElementById("ticket-script")?.getAttribute("data-type") || "all";
+            switch (field) {
+                case "offen":
+                    if (element.supporter)
+                        return;
+                    break;
+                case "bearbeitung":
+                    if (!element.supporter)
+                        return;
+                    break;
+                case "all":
+                    break;
+            }
             i++;
             if (i > (currentPage * maxPerPage) - maxPerPage && i <= currentPage * maxPerPage) {
 
@@ -57,11 +70,11 @@ async function fetchTable() {
                 //kategorie
                 var type = "";
                 switch (element.type) {
-                    case 1: type = "Allgemein";
+                    case 1: type = "💬 Allgemein";
                         break;
-                    case 2: type = "Bug";
+                    case 2: type = "⚠️ Bug";
                         break;
-                    case 3: type = "Report";
+                    case 3: type = "⛔ Report";
                 }
                 var cell = row.insertCell();
                 cell.textContent = type;
