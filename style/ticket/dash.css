@@ -24,6 +24,7 @@
 
 .board {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .headline {
@@ -44,4 +45,9 @@
     background-color: var(--sidebar-color);
     padding: 30px;
     margin-right: 50px;
+    margin-bottom: 50px;
+}
+
+#activityChart {
+    width: 700px;
 }

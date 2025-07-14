@@ -1,6 +1,6 @@
-  const topic = document.getElementById('topicChart');
+const topic = document.getElementById('topicChart');
 
-  new Chart(topic, {
+new Chart(topic, {
     type: 'doughnut',
     data: {
         labels: [
@@ -13,42 +13,42 @@
             data: [300, 50, 100],
             borderAlign: "inner",
             backgroundColor: [
-            'rgb(141, 171, 186)',
-            'rgb(250, 211, 117)',
-            'rgb(235, 138, 138)'
+                'rgb(141, 171, 186)',
+                'rgb(250, 211, 117)',
+                'rgb(235, 138, 138)'
             ],
             hoverOffset: 4
         }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: "bottom"
-                }
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: "bottom"
             }
         }
-  });
+    }
+});
 
 const bearbeiter = document.getElementById('bearbeiterChart');
 
 new Chart(bearbeiter, {
-type: 'doughnut',
-data: {
-    labels: [
-        'In Bearbeitung',
-        'Ausstehend'
-    ],
-    datasets: [{
-        label: 'My First Dataset',
-        data: [4, 8],
-        borderAlign: "inner",
-        backgroundColor: [
-        '#4b7a7e',
-        '#74C2C4'
+    type: 'doughnut',
+    data: {
+        labels: [
+            'In Bearbeitung',
+            'Ausstehend'
         ],
-        hoverOffset: 4
-    }]
+        datasets: [{
+            label: 'My First Dataset',
+            data: [4, 8],
+            borderAlign: "inner",
+            backgroundColor: [
+                '#4b7a7e',
+                '#74C2C4'
+            ],
+            hoverOffset: 4
+        }]
     },
     options: {
         responsive: true,
@@ -63,23 +63,23 @@ data: {
 const irgendwas = document.getElementById('irgendwasChart');
 
 new Chart(irgendwas, {
-type: 'doughnut',
-data: {
-    labels: [
-        'In asdfasdf',
-        'Ausasfddasfstehend'
-    ],
-    datasets: [{
-        label: 'My First Dataset',
-        data: [4, 3, 8],
-        borderAlign: "inner",
-        backgroundColor: [
-        'rgb(175, 122, 197)',
-        'rgb(195, 155, 211)',
-        'rgb(227, 202, 237)'
+    type: 'doughnut',
+    data: {
+        labels: [
+            'In asdfasdf',
+            'Ausasfddasfstehend'
         ],
-        hoverOffset: 4
-    }]
+        datasets: [{
+            label: 'My First Dataset',
+            data: [4, 3, 8],
+            borderAlign: "inner",
+            backgroundColor: [
+                'rgb(175, 122, 197)',
+                'rgb(195, 155, 211)',
+                'rgb(227, 202, 237)'
+            ],
+            hoverOffset: 4
+        }]
     },
     options: {
         responsive: true,
@@ -94,19 +94,27 @@ data: {
 const activity = document.getElementById('activityChart');
 
 new Chart(activity, {
-type: 'line',
-data: {
-    labels: [
-        'test1',
-        'test2'
-    ],
-    datasets: [{
-        label: 'My First Dataset',
-        data: [65, 59],
-        fill: false,
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.1
-    }]
+    type: 'line',
+    data: {
+        labels: [
+            'test1',
+            'test2',
+            'test4',
+            'test3',
+            'test5',
+            'test6'
+        ],
+        datasets: [{
+            label: 'My First Dataset',
+            data: [65, 59, 102, 38, 77, 45],
+            fill: true,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.3,
+            borderWidth: 3,
+            pointStyle: "circle",
+            pointHitRadius: 20,
+            pointRadius: 5,
+        }]
     },
     options: {
         responsive: true,
