@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/icon.png">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/style/ticket/dash.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Boxicons CSS -->
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <div class="headline">Dashboard</div>
+    <div class="board">
+    <div class="screen">
+        <h4 class="head">Häufigste Themen</h3>
+        <canvas id="topicChart"></canvas>
+    </div>
+        <div class="screen">
+        <h4 class="head">Status der Bearbeitung</h3>
+        <canvas id="bearbeiterChart"></canvas>
+    </div>
+    </div>
+</body>
+
+<script src="/scripts/ticket/dash.js"></script>
+
+</html>
