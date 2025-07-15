@@ -12,8 +12,18 @@ async function fetchTable() {
     const table = document.querySelector("table");
     const tbody = document.querySelector("table tbody");
     tbody.innerHTML = "";
+    const field = document.getElementById("ticket-script")?.getAttribute("data-type") || "all";
+    var urlStr = "";
+    switch(field) {
+        case "geschlossen":
+            urlStr = "closed";
+            break;
+        default:
+            urlStr = "all";
+            break;    
+    }
     try {
-        const res = await fetch("https://api.splayfer.de/ticket/list/all", {
+        const res = await fetch("https://api.splayfer.de/ticket/list/" + urlStr, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -31,7 +41,6 @@ async function fetchTable() {
         var count = 0;
 
         data.forEach(element => {
-            const field = document.getElementById("ticket-script")?.getAttribute("data-type") || "all";
             switch (field) {
                 case "offen":
                     if (element.supporter)
