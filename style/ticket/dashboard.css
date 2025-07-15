@@ -101,6 +101,10 @@ body.dark {
     position: relative;
 }
 
+.image-text {
+    padding-bottom: 10px;
+}
+
 .sidebar .image-text img {
     width: 40px;
     border-radius: 6px;
@@ -117,7 +121,9 @@ header .image-text .header-text {
 }
 
 .header-text .name {
-    font-weight: 600;
+    font-weight: 800;
+    font-size: 18px;
+    text-transform: uppercase;
 }
 
 .header-text .profession {
