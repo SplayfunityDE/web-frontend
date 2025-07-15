@@ -18,6 +18,9 @@ async function fetchTable() {
         case "geschlossen":
             urlStr = "closed";
             break;
+        case "archiviert":
+            urlStr = "archive";
+            break;    
         default:
             urlStr = "all";
             break;    
@@ -50,8 +53,8 @@ async function fetchTable() {
                     if (!element.supporter)
                         return;
                     break;
-                case "all":
-                    break;
+                default:
+                    break;    
             }
             i++;
             if (i > (currentPage * maxPerPage) - maxPerPage && i <= currentPage * maxPerPage) {
