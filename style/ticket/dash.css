@@ -49,6 +49,14 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    border-radius: 10px;
+    box-shadow: 10px 7px 7px 7px rgb(112, 112, 112, 0.1);
+    transition: 0.3s;
+}
+
+.screen:hover {
+    box-shadow: 10px 7px 7px rgb(112, 112, 112, 0.2);
+    transition: 0.3s;
 }
 
 #activityChart {
