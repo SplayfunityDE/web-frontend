@@ -18,25 +18,52 @@
 <body>
     <div class="headline">Dashboard</div>
     <div class="board">
-        <div class="screen">
+        <div id="number" class="screen">
+            <h4>Offen</h4>
+            <div class="icontext">
+                <!-- <i class='bx bx-envelope-open icon'></i> -->
+                <h1 class="numberOffen"></h1>
+            </div>
+            <div id="offenLoader" class="loader"></div>
+        </div>
+        <div id="number" class="screen">
+            <h4>In Bearbeitung</h4>
+            <h1 class="numberBearbeitung"></h1>
+            <div id="bearbeitungLoader" class="loader"></div>
+        </div>
+        <div id="number" class="screen">
+            <h4>Archiviert</h4>
+            <h1 class="numberArchiviert"></h1>
+            <div id="archiviertLoader" class="loader"></div>
+        </div>
+        <div id="number" class="screen">
+            <h4>Geschlossen</h4>
+            <h1 class="numberGeschlossen"></h1>
+            <div id="geschlossenLoader" class="loader"></div>
+        </div>
+    </div>
+    <div class="board">
+        <div id="chart" class="screen">
+            <h4 class="head">Tickets der letzten 6 Wochen</h3>
+                <canvas id="activityChart"></canvas>
+                <div id="activityLoader" class="loader"></div>
+        </div>
+    </div>
+    <div class="board">
+        <div id="chart" class="screen">
             <h4 class="head">Häufigste Themen</h3>
                 <canvas id="topicChart"></canvas>
                 <div id="topicLoader" class="loader"></div>
         </div>
-        <div class="screen">
+        <div id="chart" class="screen">
             <h4 class="head">Status der Bearbeitung</h3>
                 <canvas id="bearbeiterChart"></canvas>
                 <div id="bearbeiterLoader" class="loader"></div>
         </div>
-        <div class="screen">
+        <div id="chart" class="screen">
             <h4 class="head">Kp was ich hier schreiben soll</h3>
                 <canvas id="irgendwasChart"></canvas>
                 <div id="irgendwasLoader" class="loader"></div>
-        </div>
-        <div class="screen">
-            <h4 class="head">Tickets der letzten 6 Wochen</h3>
-                <canvas id="activityChart"></canvas>
-                <div id="activityLoader" class="loader"></div>
         </div>
     </div>
 </body>

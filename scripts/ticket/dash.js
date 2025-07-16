@@ -1,10 +1,106 @@
 const topic = document.getElementById('topicChart');
 
 document.addEventListener("DOMContentLoaded", () => {
+    fetchOffenCount();
+    fetchBearbeitungCount();
+    fetchArchiviertCount();
+    fetchGeschlssenCount();
     fetchTopicChart();
     fetchStatusChart();
     fetchActivityChart();
 });
+
+async function fetchOffenCount() {
+    try {
+        const res = await fetch("https://api.splayfer.de/ticket/count/open", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("jwt")
+            }
+        });
+        if (!res.ok) {
+            throw new Error(`HTTP ${res.status}`);
+        }
+
+        const data = await res.text();
+
+        document.querySelector(".screen .numberOffen").innerHTML = data;
+        document.querySelector("#offenLoader").style.opacity = "0";
+
+    } catch (error) {
+        console.error("Fehler beim Laden der Tabelle:", error);
+    }
+}
+
+async function fetchBearbeitungCount() {
+    try {
+        const res = await fetch("https://api.splayfer.de/ticket/count/claimed", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("jwt")
+            }
+        });
+        if (!res.ok) {
+            throw new Error(`HTTP ${res.status}`);
+        }
+
+        const data = await res.text();
+
+        document.querySelector(".screen .numberBearbeitung").innerHTML = data;
+        document.querySelector("#bearbeitungLoader").style.opacity = "0";
+
+    } catch (error) {
+        console.error("Fehler beim Laden der Tabelle:", error);
+    }
+}
+
+async function fetchArchiviertCount() {
+    try {
+        const res = await fetch("https://api.splayfer.de/ticket/count/archive", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("jwt")
+            }
+        });
+        if (!res.ok) {
+            throw new Error(`HTTP ${res.status}`);
+        }
+
+        const data = await res.text();
+
+        document.querySelector(".screen .numberArchiviert").innerHTML = data;
+        document.querySelector("#archiviertLoader").style.opacity = "0";
+
+    } catch (error) {
+        console.error("Fehler beim Laden der Tabelle:", error);
+    }
+}
+
+async function fetchGeschlssenCount() {
+    try {
+        const res = await fetch("https://api.splayfer.de/ticket/count/closed", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("jwt")
+            }
+        });
+        if (!res.ok) {
+            throw new Error(`HTTP ${res.status}`);
+        }
+
+        const data = await res.text();
+
+        document.querySelector(".screen .numberGeschlossen").innerHTML = data;
+        document.querySelector("#geschlossenLoader").style.opacity = "0";
+
+    } catch (error) {
+        console.error("Fehler beim Laden der Tabelle:", error);
+    }
+}
 
 async function fetchTopicChart() {
     try {

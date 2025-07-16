@@ -41,6 +41,11 @@
     margin-bottom: 20px;
 }
 
+.screen h1 {
+    font-size: 70px;
+    font-weight: 800;
+}
+
 .screen {
     background-color: var(--sidebar-color);
     padding: 30px;
@@ -52,6 +57,22 @@
     border-radius: 10px;
     box-shadow: 10px 7px 7px 7px rgb(112, 112, 112, 0.1);
     transition: 0.3s;
+}
+
+#number {
+    height: 200px;
+    width: 170px;
+}
+
+#number i {
+    font-size: 50px;
+}
+
+.icontext {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
 }
 
 .screen:hover {
@@ -74,10 +95,10 @@
     display: flex;
     align-self: center;
     justify-content: center;
-    width: 40px;
+    width: 50px;
     aspect-ratio: 1;
     border-radius: 50%;
-    border: 5px solid #333;
+    border: 7px solid #333;
     animation:
         l20-1 0.8s infinite linear alternate,
         l20-2 1.6s infinite linear;
