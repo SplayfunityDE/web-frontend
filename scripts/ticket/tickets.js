@@ -2,6 +2,7 @@ var currentPage = 1;
 const maxPerPage = 15;
 const leftArrowTxt = "<i class='bx bx-fw  bxs-arrow-left-stroke'></i>";
 const rightArrowTxt = "<i class='bx bx-fw  bxs-arrow-right-stroke'></i>";
+const emptyRowCount = 4;
 
 document.addEventListener("DOMContentLoaded", () => {
     fetchTable();
@@ -38,7 +39,7 @@ async function fetchTable() {
             throw new Error(`HTTP ${res.status}`);
         }
 
-        const data = await res.json()
+        const data = await res.json();
 
         var i = 0;
         var count = 0;
@@ -111,6 +112,36 @@ async function fetchTable() {
                 caption.innerHTML = leftArrowTxt + " " + pageTxt;
             else
                 caption.innerHTML = leftArrowTxt + " " + pageTxt + " " + rightArrowTxt;
+        }
+
+        if(data.length == 0) {
+            for (let mainIndex = 0; mainIndex < emptyRowCount; mainIndex++) {
+                var row = tbody.insertRow();
+                const cell = row.insertCell();
+                cell.textContent = "# ticketkanal";
+                cell.className = "empty" + (mainIndex + 1);
+                for (let index = 0; index < 4; index++) {
+                    const cell = row.insertCell();
+                    cell.className = "empty" + (mainIndex + 1);
+                }
+            }
+            let transparencyMap = {};
+            transparencyMap[1] = "1";
+            transparencyMap[2] = "0.7";
+            transparencyMap[3] = "0.5";
+            transparencyMap[4] = "0.3";
+            for (let index = 0; index < emptyRowCount; index++) {
+                const cells = document.querySelectorAll(".empty" + (index + 1));
+                cells.forEach(onecell => {
+                    onecell.style.border = "1px solid rgb(199, 197, 197, " + transparencyMap[index + 1] + ")";
+                    onecell.style.color = "rgba(255, 255, 255, 0)";
+                    onecell.style.borderRight = "none";
+                    onecell.style.borderLeft = "none";
+                    onecell.style.borderBottom = "none"; 
+                });
+            }
+            document.querySelector(".empty").style.opacity =  "1"; 
+            caption.innerHTML = "";
         }
 
         table.style.opacity = "1";
