@@ -24,7 +24,7 @@
 
 .headline {
     font-size: 45px;
-    font-weight: 400;
+    font-weight: 500;
     color: var(--text-color);
     padding-top: 20px;
     padding-bottom: 40px;
@@ -126,14 +126,15 @@ tr:hover {
 .content {}
 
 .empty {
-    transition: 0.4s;
     opacity: 0;
     top: 320px;
     display: flex;
     flex-direction: column;
     font-size: 17px;
+    font-weight: 500;
     position: fixed;
     width: 200px;
+    color: rgb(69, 69, 69);
 }
 
 .empty * {
@@ -142,7 +143,6 @@ tr:hover {
 
 .empty i {
     font-size: 50px;
-    color: rgb(69, 69, 69);
     margin: 10px;
 }
 
@@ -179,6 +179,7 @@ tr:hover {
     12.5% {
         clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 0%, 100% 0%, 100% 0%)
     }
+
     25% {
         clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 100%, 100% 100%, 100% 100%)
     }

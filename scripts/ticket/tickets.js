@@ -21,10 +21,10 @@ async function fetchTable() {
             break;
         case "archiviert":
             urlStr = "archive";
-            break;    
+            break;
         default:
             urlStr = "all";
-            break;    
+            break;
     }
     try {
         const res = await fetch("https://api.splayfer.de/ticket/list/" + urlStr, {
@@ -55,7 +55,7 @@ async function fetchTable() {
                         return;
                     break;
                 default:
-                    break;    
+                    break;
             }
             i++;
             if (i > (currentPage * maxPerPage) - maxPerPage && i <= currentPage * maxPerPage) {
@@ -114,7 +114,7 @@ async function fetchTable() {
                 caption.innerHTML = leftArrowTxt + " " + pageTxt + " " + rightArrowTxt;
         }
 
-        if(data.length == 0) {
+        if (data.length == 0) {
             for (let mainIndex = 0; mainIndex < emptyRowCount; mainIndex++) {
                 var row = tbody.insertRow();
                 const cell = row.insertCell();
@@ -137,10 +137,10 @@ async function fetchTable() {
                     onecell.style.color = "rgba(255, 255, 255, 0)";
                     onecell.style.borderRight = "none";
                     onecell.style.borderLeft = "none";
-                    onecell.style.borderBottom = "none"; 
+                    onecell.style.borderBottom = "none";
                 });
             }
-            document.querySelector(".empty").style.opacity =  "1"; 
+            document.querySelector(".empty").style.opacity = "1";
             caption.innerHTML = "";
         }
 

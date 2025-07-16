@@ -1,66 +1,114 @@
 const topic = document.getElementById('topicChart');
 
-new Chart(topic, {
-    type: 'doughnut',
-    data: {
-        labels: [
-            'Allgemein',
-            'Bug',
-            'Report'
-        ],
-        datasets: [{
-            label: 'My First Dataset',
-            data: [300, 50, 100],
-            borderAlign: "inner",
-            backgroundColor: [
-                'rgb(141, 171, 186)',
-                'rgb(250, 211, 117)',
-                'rgb(235, 138, 138)'
-            ],
-            hoverOffset: 4
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: "bottom"
-            }
-        }
-    }
+document.addEventListener("DOMContentLoaded", () => {
+    fetchTopicChart();
+    fetchStatusChart();
+    fetchActivityChart();
 });
 
-const bearbeiter = document.getElementById('bearbeiterChart');
-
-new Chart(bearbeiter, {
-    type: 'doughnut',
-    data: {
-        labels: [
-            'In Bearbeitung',
-            'Ausstehend'
-        ],
-        datasets: [{
-            label: 'My First Dataset',
-            data: [4, 8],
-            borderAlign: "inner",
-            backgroundColor: [
-                '#4b7a7e',
-                '#74C2C4'
-            ],
-            hoverOffset: 4
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: "bottom"
+async function fetchTopicChart() {
+    try {
+        const res = await fetch("https://api.splayfer.de/ticket/chart/topics", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("jwt")
             }
+        });
+        if (!res.ok) {
+            throw new Error(`HTTP ${res.status}`);
         }
+        const data = await res.json();
+
+        document.querySelector("#topicLoader").style.opacity = "0";
+
+        new Chart(topic, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    'Allgemein',
+                    'Bug',
+                    'Report'
+                ],
+                datasets: [{
+                    label: 'Tickets',
+                    data: [data["1"], data["2"], data["3"]],
+                    borderAlign: "inner",
+                    backgroundColor: [
+                        'rgb(141, 171, 186)',
+                        'rgb(235, 138, 138)',
+                        'rgb(250, 211, 117)'
+                    ],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: "bottom"
+                    }
+                }
+            }
+        });
+    } catch (error) {
+        console.error("Fehler beim Laden der Tabelle:", error);
     }
-});
+}
+
+async function fetchStatusChart() {
+    const bearbeiter = document.getElementById('bearbeiterChart');
+
+    try {
+        const res = await fetch("https://api.splayfer.de/ticket/chart/status", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("jwt")
+            }
+        });
+        if (!res.ok) {
+            throw new Error(`HTTP ${res.status}`);
+        }
+        const data = await res.json();
+
+        document.querySelector("#bearbeiterLoader").style.opacity = "0";
+
+        new Chart(bearbeiter, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    'In Bearbeitung',
+                    'Ausstehend'
+                ],
+                datasets: [{
+                    label: 'Tickets',
+                    data: [data.bearbeitung, data.offen],
+                    borderAlign: "inner",
+                    backgroundColor: [
+                        '#4b7a7e',
+                        '#74C2C4'
+                    ],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: "bottom"
+                    }
+                }
+            }
+        });
+    } catch (error) {
+        console.error("Fehler beim Laden der Tabelle:", error);
+    }
+}
 
 const irgendwas = document.getElementById('irgendwasChart');
+
+document.querySelector("#irgendwasLoader").style.opacity = "0";
 
 new Chart(irgendwas, {
     type: 'doughnut',
@@ -70,7 +118,7 @@ new Chart(irgendwas, {
             'Ausasfddasfstehend'
         ],
         datasets: [{
-            label: 'My First Dataset',
+            label: 'Tickets',
             data: [4, 3, 8],
             borderAlign: "inner",
             backgroundColor: [
@@ -91,37 +139,76 @@ new Chart(irgendwas, {
     }
 });
 
-const activity = document.getElementById('activityChart');
+async function fetchActivityChart() {
+    const activity = document.getElementById('activityChart');
 
-new Chart(activity, {
-    type: 'line',
-    data: {
-        labels: [
-            'test1',
-            'test2',
-            'test4',
-            'test3',
-            'test5',
-            'test6'
-        ],
-        datasets: [{
-            label: 'My First Dataset',
-            data: [65, 59, 102, 38, 77, 45],
-            fill: true,
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.3,
-            borderWidth: 3,
-            pointStyle: "circle",
-            pointHitRadius: 20,
-            pointRadius: 5,
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: "bottom"
+    try {
+        const res = await fetch("https://api.splayfer.de/ticket/chart/activity", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("jwt")
             }
+        });
+        if (!res.ok) {
+            throw new Error(`HTTP ${res.status}`);
         }
+        const data = await res.json();
+
+        document.querySelector("#activityLoader").style.opacity = "0";
+
+        new Chart(activity, {
+            type: 'line',
+            data: {
+                labels: [
+                    'Vor 5 Wochen',
+                    'Vor 4 Wochen',
+                    'Vor 3 Wochen',
+                    'Vor 2 Wochen',
+                    'Letzte Woche',
+                    'Diese Woche'
+                ],
+                datasets: [{
+                    label: 'Tickets',
+                    data: [
+                        data["5"] || 0,
+                        data["4"] || 0,
+                        data["3"] || 0,
+                        data["2"] || 0,
+                        data["1"] || 0,
+                        data["0"] || 0
+                    ],
+                    fill: true,
+                    borderColor: 'rgb(141, 171, 186)',
+                    tension: 0.1,
+                    borderWidth: 3,
+                    pointStyle: "circle",
+                    pointHitRadius: 20,
+                    pointRadius: 5,
+                    pointBackgroundColor: 'rgb(141, 171, 186, 0.8)'
+                }]
+            },
+            options: {
+                responsive: true,
+                aspectRatio: 4,
+                plugins: {
+                    legend: {
+                        position: "none"
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            beginAtZero: true,
+                            callback: function (value) {
+                                return Number.isInteger(value) ? value : '';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    } catch (error) {
+        console.error("Fehler beim Laden der Tabelle:", error);
     }
-});
+}
