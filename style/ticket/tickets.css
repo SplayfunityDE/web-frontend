@@ -112,7 +112,7 @@ tr:hover {
     outline: none;
     border: none;
     border-radius: 6px;
-    font-size: 16px;
+    font-size: 16px;                    
     font-weight: 500;
     background: var(--primary-color-light);
     transition: var(--tran-05);
@@ -135,11 +135,14 @@ tr:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-size: 17px;
 }
 
 .empty i {
-    font-size: 40px;
+    font-size: 50px;
     color: rgb(69, 69, 69);
+    margin: 10px;
+    align-self: center;
 }
 
 /* HTML: <div class="loader"></div> */
