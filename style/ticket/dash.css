@@ -65,7 +65,8 @@
 }
 
 #number i {
-    font-size: 50px;
+    font-size: 0px;
+    font-weight: 600;
 }
 
 .icontext {
