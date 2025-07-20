@@ -287,7 +287,7 @@ window.onload = function () {
                 var yDiv = document.createElement("div");
                 yDiv.className = "y_resize tb_resize";
                 yDiv.setAttribute("data-resizecol", i);
-                var leftPos = i * th_width + 0.5;
+                var leftPos = i * th_width;
                 yDiv.style.cssText = "left: " + leftPos + "px;";
                 cont.append(yDiv);
             }

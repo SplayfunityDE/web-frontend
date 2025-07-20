@@ -237,6 +237,21 @@ table caption i {
     cursor: col-resize;
 }
 
+.y_resize::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -2vw;
+    width: 70px;
+    height: 102%;
+    cursor: col-resize;
+}
+
+.y_resize:hover::before {
+    position: absolute;
+    cursor: col-resize;
+}
+
 .y_resize:hover {
     background: var(--text-color);
     opacity: 0.5;
