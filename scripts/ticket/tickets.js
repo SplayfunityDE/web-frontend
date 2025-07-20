@@ -62,7 +62,7 @@ async function fetchTable(searchPattern) {
             }
 
             var searchVar = element.channelTxt || "undefined";
-            if (searchPattern != null && !searchVar.includes(searchPattern))
+            if (searchPattern != null && !searchVar.toLowerCase().includes(searchPattern.toLowerCase()))
                 return;
 
             i++;
@@ -122,7 +122,7 @@ async function fetchTable(searchPattern) {
                 caption.innerHTML = leftArrowTxt + " " + pageTxt + " " + rightArrowTxt;
         }
 
-        if (data.length == 0) {
+        if (count == 0) {
             for (let mainIndex = 0; mainIndex < emptyRowCount; mainIndex++) {
                 var row = tbody.insertRow();
                 const cell = row.insertCell();
@@ -184,6 +184,7 @@ async function fetchTable(searchPattern) {
 }
 
 async function reloadTable(searchPattern) {
+    document.querySelector(".empty").style.opacity = "0";
     const table = document.querySelector("table");
     table.style.opacity = "0";
     document.querySelector("table caption").style.opacity = "0";
