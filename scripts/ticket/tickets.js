@@ -62,10 +62,8 @@ async function fetchTable(searchPattern) {
             }
 
             var searchVar = element.channelTxt || "undefined";
-            if (searchPattern != null && !searchVar.includes(searchPattern)) {
-                console.log(searchVar);
+            if (searchPattern != null && !searchVar.includes(searchPattern))
                 return;
-            }
 
             i++;
             if (i > (currentPage * maxPerPage) - maxPerPage && i <= currentPage * maxPerPage) {
@@ -303,10 +301,24 @@ window.onload = function () {
 //search bar logic
 document.addEventListener("DOMContentLoaded", () => {
     const search = document.querySelector(".search");
+    let debounceTimeout;
     search.addEventListener("input", () => {
-        if (isFetching == false) {
-            const table = document.querySelector("table_resize");
-            reloadTable(search.value);
-        }
+        clearTimeout(debounceTimeout);  // Löscht den vorherigen Timeout, falls der Benutzer weiterhin tippt
+
+        debounceTimeout = setTimeout(() => {
+
+            // Verhindert das Starten einer neuen Anfrage, wenn bereits eine läuft
+            if (isFetching) {
+                return;
+            }
+
+            console.log(search.value);
+
+            if (!search.value.length == 0)
+                reloadTable(search.value);
+            else
+                reloadTable();
+
+        }, 500);  // 500 ms Wartezeit nach der letzten Eingabe
     });
 });
