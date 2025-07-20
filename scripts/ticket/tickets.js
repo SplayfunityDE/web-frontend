@@ -4,12 +4,14 @@ const leftArrowTxt = "<i class='bx bx-fw  bxs-arrow-left-stroke'></i>";
 const rightArrowTxt = "<i class='bx bx-fw  bxs-arrow-right-stroke'></i>";
 const emptyRowCount = 4;
 
+let isFetching = false;
+
 document.addEventListener("DOMContentLoaded", () => {
     fetchTable();
 });
 
 
-async function fetchTable() {
+async function fetchTable(searchPattern) {
     const table = document.querySelector("table");
     const tbody = document.querySelector("table tbody");
     tbody.innerHTML = "";
@@ -26,6 +28,7 @@ async function fetchTable() {
             urlStr = "all";
             break;
     }
+    isFetching = true;
     try {
         const res = await fetch("https://api.splayfer.de/ticket/list/" + urlStr, {
             method: "GET",
@@ -57,6 +60,13 @@ async function fetchTable() {
                 default:
                     break;
             }
+
+            var searchVar = element.channelTxt || "undefined";
+            if (searchPattern != null && !searchVar.includes(searchPattern)) {
+                console.log(searchVar);
+                return;
+            }
+
             i++;
             if (i > (currentPage * maxPerPage) - maxPerPage && i <= currentPage * maxPerPage) {
 
@@ -172,14 +182,15 @@ async function fetchTable() {
     } catch (error) {
         console.error("Fehler beim Laden der Tabelle:", error);
     }
+    isFetching = false;
 }
 
-async function reloadTable() {
+async function reloadTable(searchPattern) {
     const table = document.querySelector("table");
     table.style.opacity = "0";
     document.querySelector("table caption").style.opacity = "0";
     document.querySelector(".loader").style.opacity = "1";
-    fetchTable();
+    fetchTable(searchPattern);
 }
 
 //code for resizable table content
@@ -288,3 +299,14 @@ window.onload = function () {
         initEvents(table_th);
     })();
 };
+
+//search bar logic
+document.addEventListener("DOMContentLoaded", () => {
+    const search = document.querySelector(".search");
+    search.addEventListener("input", () => {
+        if (isFetching == false) {
+            const table = document.querySelector("table_resize");
+            reloadTable(search.value);
+        }
+    });
+});
