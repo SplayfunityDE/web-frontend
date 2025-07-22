@@ -9,15 +9,16 @@ async function handleLogin(event) {
     event.preventDefault();
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
-    fetchCredentials(username, password);
+    const remember = document.getElementById("remember").checked;
+    fetchCredentials(username, password, remember);
 }
 
-async function fetchCredentials(username, value) {
+async function fetchCredentials(username, value, remember) {
     const buttonSpinner = document.querySelector(".loader");
     const buttonText = document.querySelector(".btntext");
     const errorField = document.querySelector(".error");
     try {
-        const response = (await fetch("https://api.splayfer.de/authentication/accounts/login?remember=true", {
+        const response = (await fetch("https://api.splayfer.de/authentication/accounts/login?remember=" + remember, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
