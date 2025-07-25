@@ -11,6 +11,15 @@ if (sessionStorage.getItem("darkmode") == "true") {
     body.classList.toggle("dark");
 }
 
+window.addEventListener('message', (event) => {
+    // Optional: Herkunft prüfen (für Sicherheit)
+    // if (event.origin !== 'https://deine-domain.de') return;
+
+    if (typeof event.data.dark !== 'undefined') {
+        body.classList.toggle("dark");
+    }
+});
+
 document.addEventListener("DOMContentLoaded", () => {
     fetchTable();
 });
