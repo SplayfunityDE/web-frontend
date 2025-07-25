@@ -1,6 +1,7 @@
 const topic = document.getElementById('topicChart');
 
 document.addEventListener("DOMContentLoaded", () => {
+    const token = localStorage.getItem("jwt") ? localStorage.getItem("jwt") : sessionStorage.getItem("jwt");
     fetchOffenCount();
     fetchBearbeitungCount();
     fetchArchiviertCount();
@@ -12,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function fetchOffenCount() {
     try {
-        const token = localStorage.getItem("jwt") ? localStorage.getItem("jwt") : sessionStorage.getItem("jwt");
         const res = await fetch("https://api.splayfer.de/ticket/count/open", {
             method: "GET",
             headers: {
@@ -40,7 +40,7 @@ async function fetchBearbeitungCount() {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("jwt")
+                "Authorization": "Bearer " + token
             }
         });
         if (!res.ok) {
@@ -63,7 +63,7 @@ async function fetchArchiviertCount() {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("jwt")
+                "Authorization": "Bearer " + token
             }
         });
         if (!res.ok) {
@@ -86,7 +86,7 @@ async function fetchGeschlssenCount() {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("jwt")
+                "Authorization": "Bearer " + token
             }
         });
         if (!res.ok) {
@@ -109,7 +109,7 @@ async function fetchTopicChart() {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("jwt")
+                "Authorization": "Bearer " + token
             }
         });
         if (!res.ok) {
@@ -161,7 +161,7 @@ async function fetchStatusChart() {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("jwt")
+                "Authorization": "Bearer " + token
             }
         });
         if (!res.ok) {
@@ -244,7 +244,7 @@ async function fetchActivityChart() {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("jwt")
+                "Authorization": "Bearer " + token
             }
         });
         if (!res.ok) {
