@@ -30,11 +30,12 @@ async function fetchTable(searchPattern) {
     }
     isFetching = true;
     try {
+        const token = localStorage.getItem("jwt") ? localStorage.getItem("jwt") : sessionStorage.getItem("jwt");
         const res = await fetch("https://api.splayfer.de/ticket/list/" + urlStr, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("jwt")
+                "Authorization": "Bearer " + token
             }
         });
 

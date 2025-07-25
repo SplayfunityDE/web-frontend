@@ -12,11 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function fetchOffenCount() {
     try {
+        const token = localStorage.getItem("jwt") ? localStorage.getItem("jwt") : sessionStorage.getItem("jwt");
         const res = await fetch("https://api.splayfer.de/ticket/count/open", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("jwt")
+                "Authorization": "Bearer " + token
             }
         });
         if (!res.ok) {
