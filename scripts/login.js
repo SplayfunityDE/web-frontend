@@ -33,7 +33,8 @@ async function fetchCredentials(username, value, remember) {
             })
             .then(data => {
                 const token = data.token;
-                localStorage.setItem("jwt", token);
+                const storage = remember == true ? localStorage : sessionStorage;
+                storage.setItem("jwt", token);
                 window.location.href = '/sites/ticket/dashboard.html';
             })
         );
