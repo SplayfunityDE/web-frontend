@@ -1,7 +1,8 @@
 const topic = document.getElementById('topicChart');
+let token;
 
 document.addEventListener("DOMContentLoaded", () => {
-    const token = localStorage.getItem("jwt") ? localStorage.getItem("jwt") : sessionStorage.getItem("jwt");
+    token = localStorage.getItem("jwt") ? localStorage.getItem("jwt") : sessionStorage.getItem("jwt");
     fetchOffenCount();
     fetchBearbeitungCount();
     fetchArchiviertCount();
