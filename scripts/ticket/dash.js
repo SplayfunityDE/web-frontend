@@ -2,19 +2,30 @@ const body = document.querySelector("body");
 const topic = document.getElementById('topicChart');
 let token;
 
+var chart1,
+    chart2,
+    chart3;
+
 if (sessionStorage.getItem("darkmode") == "true") {
     body.classList.toggle("dark");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     token = localStorage.getItem("jwt") ? localStorage.getItem("jwt") : sessionStorage.getItem("jwt");
-    fetchOffenCount();
-    fetchBearbeitungCount();
-    fetchArchiviertCount();
-    fetchGeschlssenCount();
-    fetchTopicChart();
-    fetchStatusChart();
-    fetchActivityChart();
+    Promise.all([
+        fetchOffenCount(),
+        fetchBearbeitungCount(),
+        fetchArchiviertCount(),
+        fetchGeschlssenCount(),
+        fetchTopicChart(),
+        fetchStatusChart(),
+        fetchActivityChart()
+    ]).then(() => {
+        // Update der Chart-Farben nach Abschluss aller Anfragen
+        updateChartColors();
+    }).catch((error) => {
+        console.error("Fehler beim Laden der Daten:", error);
+    });
 });
 
 window.addEventListener('message', (event) => {
@@ -23,13 +34,7 @@ window.addEventListener('message', (event) => {
 
     if (typeof event.data.dark !== 'undefined') {
         body.classList.toggle("dark");
-        fetchOffenCount();
-        fetchBearbeitungCount();
-        fetchArchiviertCount();
-        fetchGeschlssenCount();
-        fetchTopicChart();
-        fetchStatusChart();
-        fetchActivityChart();
+        updateChartColors();
     }
 });
 
@@ -141,7 +146,7 @@ async function fetchTopicChart() {
 
         document.querySelector("#topicLoader").style.opacity = "0";
 
-        new Chart(topic, {
+        chart1 = new Chart(topic, {
             type: 'doughnut',
             data: {
                 labels: [
@@ -159,8 +164,7 @@ async function fetchTopicChart() {
                         'rgb(250, 211, 117)'
                     ],
                     hoverOffset: 4,
-                    borderWidth: 4,
-                    borderColor: getComputedStyle(document.documentElement).getPropertyValue('--sidebar-color').trim()
+                    borderWidth: 4
                 }]
             },
             options: {
@@ -172,6 +176,8 @@ async function fetchTopicChart() {
                 }
             }
         });
+        chart1.data.datasets[0].borderColor = getComputedStyle(body).getPropertyValue('--sidebar-color').trim();
+        chart1.update();
     } catch (error) {
         console.error("Fehler beim Laden der Tabelle:", error);
     }
@@ -195,7 +201,7 @@ async function fetchStatusChart() {
 
         document.querySelector("#bearbeiterLoader").style.opacity = "0";
 
-        new Chart(bearbeiter, {
+        chart2 = new Chart(bearbeiter, {
             type: 'doughnut',
             data: {
                 labels: [
@@ -223,6 +229,8 @@ async function fetchStatusChart() {
                 }
             }
         });
+        chart2.data.datasets[0].borderColor = getComputedStyle(body).getPropertyValue('--sidebar-color').trim();
+        chart2.update();
     } catch (error) {
         console.error("Fehler beim Laden der Tabelle:", error);
     }
@@ -232,7 +240,7 @@ const irgendwas = document.getElementById('irgendwasChart');
 
 document.querySelector("#irgendwasLoader").style.opacity = "0";
 
-new Chart(irgendwas, {
+chart3 = new Chart(irgendwas, {
     type: 'doughnut',
     data: {
         labels: [
@@ -261,6 +269,8 @@ new Chart(irgendwas, {
         }
     }
 });
+chart3.data.datasets[0].borderColor = getComputedStyle(body).getPropertyValue('--sidebar-color').trim();
+chart3.update();
 
 async function fetchActivityChart() {
     const activity = document.getElementById('activityChart');
