@@ -27,8 +27,8 @@ window.addEventListener('message', (event) => {
 
     if (typeof event.data.dark !== 'undefined') {
         body.classList.toggle("dark");
+        updateChartColors();
     }
-    updateChartColors();
 });
 
 function updateChartColors() {
