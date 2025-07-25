@@ -28,7 +28,29 @@ window.addEventListener('message', (event) => {
     if (typeof event.data.dark !== 'undefined') {
         body.classList.toggle("dark");
     }
+    updateChartColors();
 });
+
+function updateChartColors() {
+    const body = document.querySelector("body");
+
+    // Sidebar-Farbe aus den CSS-Variablen holen
+    const sidebarColor = getComputedStyle(body).getPropertyValue('--sidebar-color').trim();
+
+    // Update die Farben der Charts
+    if (chart1) {
+        chart1.data.datasets[0].borderColor = sidebarColor;
+        chart1.update();
+    }
+    if (chart2) {
+        chart2.data.datasets[0].borderColor = sidebarColor;
+        chart2.update();
+    }
+    if (chart3) {
+        chart3.data.datasets[0].borderColor = sidebarColor;
+        chart3.update();
+    }
+}
 
 async function fetchOffenCount() {
     try {
