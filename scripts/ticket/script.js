@@ -44,8 +44,7 @@ logoutLink.addEventListener("click", async () => {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    const token = localStorage.getItem('jwt');
-    if (!token) {
+    if (!localStorage.getItem('jwt') || !sessionStorage.getItem('jwt')) {
         window.location.href = '/sites/login.html';
     }
 });
