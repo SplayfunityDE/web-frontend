@@ -1,3 +1,4 @@
+const body = document.querySelector("body");
 var currentPage = 1;
 const maxPerPage = 15;
 const leftArrowTxt = "<i class='bx bx-fw  bxs-arrow-left-stroke'></i>";
@@ -6,10 +7,13 @@ const emptyRowCount = 4;
 
 let isFetching = false;
 
+if (sessionStorage.getItem("darkmode") == "true") {
+    body.classList.toggle("dark");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     fetchTable();
 });
-
 
 async function fetchTable(searchPattern) {
     const table = document.querySelector("table");

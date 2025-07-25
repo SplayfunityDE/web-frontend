@@ -1,5 +1,10 @@
+const body = document.querySelector("body");
 const topic = document.getElementById('topicChart');
 let token;
+
+if (sessionStorage.getItem("darkmode") == "true") {
+    body.classList.toggle("dark");
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     token = localStorage.getItem("jwt") ? localStorage.getItem("jwt") : sessionStorage.getItem("jwt");
@@ -10,6 +15,22 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchTopicChart();
     fetchStatusChart();
     fetchActivityChart();
+});
+
+window.addEventListener('message', (event) => {
+    // Optional: Herkunft prüfen (für Sicherheit)
+    // if (event.origin !== 'https://deine-domain.de') return;
+
+    if (typeof event.data.dark !== 'undefined') {
+        body.classList.toggle("dark");
+        fetchOffenCount();
+        fetchBearbeitungCount();
+        fetchArchiviertCount();
+        fetchGeschlssenCount();
+        fetchTopicChart();
+        fetchStatusChart();
+        fetchActivityChart();
+    }
 });
 
 async function fetchOffenCount() {
@@ -137,7 +158,9 @@ async function fetchTopicChart() {
                         'rgb(235, 138, 138)',
                         'rgb(250, 211, 117)'
                     ],
-                    hoverOffset: 4
+                    hoverOffset: 4,
+                    borderWidth: 4,
+                    borderColor: getComputedStyle(document.documentElement).getPropertyValue('--sidebar-color').trim()
                 }]
             },
             options: {
@@ -187,7 +210,8 @@ async function fetchStatusChart() {
                         '#4b7a7e',
                         '#74C2C4'
                     ],
-                    hoverOffset: 4
+                    hoverOffset: 4,
+                    borderWidth: 4
                 }]
             },
             options: {
@@ -224,7 +248,8 @@ new Chart(irgendwas, {
                 'rgb(195, 155, 211)',
                 'rgb(227, 202, 237)'
             ],
-            hoverOffset: 4
+            hoverOffset: 4,
+            borderWidth: 4
         }]
     },
     options: {

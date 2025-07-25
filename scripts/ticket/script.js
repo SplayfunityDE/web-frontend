@@ -9,13 +9,21 @@ toggle.addEventListener("click", () => {
     sidebar.classList.toggle("close");
 });
 
+if (sessionStorage.getItem("darkmode") == "true") {
+    body.classList.toggle("dark");
+}
+
 modeSwitch.addEventListener("click", () => {
     body.classList.toggle("dark");
-
+    const iframe = document.getElementById("contentFrame");
     if (body.classList.contains("dark")) {
-        modeText.innerHTML = "Light Mode"
+        modeText.innerHTML = "Light Mode";
+        iframe.contentWindow.postMessage({ dark: true }, "*");
+        sessionStorage.setItem("darkmode", true);
     } else {
-        modeText.innerHTML = "Dark Mode"
+        modeText.innerHTML = "Dark Mode";
+        iframe.contentWindow.postMessage({ dark: false }, "*");
+        sessionStorage.setItem("darkmode", false);
     }
 });
 
@@ -27,7 +35,7 @@ navLinks.forEach(link => {
         const page = link.getAttribute("data-page");
         try {
             const response = await fetch(`/sites/ticket/${page}.html`);
-            homeSection.innerHTML = "<iframe src=\" /sites/ticket/" + page + ".html\" width=\"100 % \" height=\"100 % \" style=\"border: none;\"></iframe>"
+            homeSection.innerHTML = "<iframe id=\"contentFrame\" src=\" /sites/ticket/" + page + ".html\" width=\"100 % \" height=\"100 % \" style=\"border: none;\"></iframe>"
         } catch (err) {
             homeSection.innerHTML = "<div class='text'>Fehler beim Laden der Seite.</div>";
             console.error("Ladefehler:", err);
@@ -58,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return response.text();
         })
         .then(html => {
-            homeSection.innerHTML = "<iframe src=\" /sites/ticket/dash.html\" width=\"100 % \" height=\"100 % \" style=\"border: none;\"></iframe>"
+            homeSection.innerHTML = "<iframe id=\"contentFrame\" src=\" /sites/ticket/dash.html\" width=\"100 % \" height=\"100 % \" style=\"border: none;\"></iframe>"
         })
         .catch(error => {
             console.error("Fehler beim Laden:", error);
