@@ -12,20 +12,13 @@ if (sessionStorage.getItem("darkmode") == "true") {
 
 document.addEventListener("DOMContentLoaded", () => {
     token = localStorage.getItem("jwt") ? localStorage.getItem("jwt") : sessionStorage.getItem("jwt");
-    Promise.all([
-        fetchOffenCount(),
-        fetchBearbeitungCount(),
-        fetchArchiviertCount(),
-        fetchGeschlssenCount(),
-        fetchTopicChart(),
-        fetchStatusChart(),
-        fetchActivityChart()
-    ]).then(() => {
-        // Update der Chart-Farben nach Abschluss aller Anfragen
-        updateChartColors();
-    }).catch((error) => {
-        console.error("Fehler beim Laden der Daten:", error);
-    });
+    fetchOffenCount();
+    fetchBearbeitungCount();
+    fetchArchiviertCount();
+    fetchGeschlssenCount();
+    fetchTopicChart();
+    fetchStatusChart();
+    fetchActivityChart();
 });
 
 window.addEventListener('message', (event) => {
@@ -34,7 +27,6 @@ window.addEventListener('message', (event) => {
 
     if (typeof event.data.dark !== 'undefined') {
         body.classList.toggle("dark");
-        updateChartColors();
     }
 });
 
