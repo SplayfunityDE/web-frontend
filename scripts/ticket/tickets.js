@@ -192,7 +192,7 @@ async function fetchTable(searchPattern) {
         });
 
     } catch (error) {
-        console.error("Fehler beim Laden der Tabelle:", error);
+        window.top.location.href = '/sites/login.html';
     }
     isFetching = false;
 }

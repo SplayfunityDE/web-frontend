@@ -71,7 +71,7 @@ async function fetchOffenCount() {
         document.querySelector("#offenLoader").style.opacity = "0";
 
     } catch (error) {
-        console.error("Fehler beim Laden der Tabelle:", error);
+        window.top.location.href = '/sites/login.html';
     }
 }
 
@@ -94,7 +94,7 @@ async function fetchBearbeitungCount() {
         document.querySelector("#bearbeitungLoader").style.opacity = "0";
 
     } catch (error) {
-        console.error("Fehler beim Laden der Tabelle:", error);
+        window.top.location.href = '/sites/login.html';
     }
 }
 
@@ -117,7 +117,7 @@ async function fetchArchiviertCount() {
         document.querySelector("#archiviertLoader").style.opacity = "0";
 
     } catch (error) {
-        console.error("Fehler beim Laden der Tabelle:", error);
+        window.top.location.href = '/sites/login.html';
     }
 }
 
@@ -140,7 +140,7 @@ async function fetchGeschlssenCount() {
         document.querySelector("#geschlossenLoader").style.opacity = "0";
 
     } catch (error) {
-        console.error("Fehler beim Laden der Tabelle:", error);
+        window.top.location.href = '/sites/login.html';
     }
 }
 
@@ -193,7 +193,7 @@ async function fetchTopicChart() {
         chart1.data.datasets[0].borderColor = getComputedStyle(body).getPropertyValue('--sidebar-color').trim();
         chart1.update();
     } catch (error) {
-        console.error("Fehler beim Laden der Tabelle:", error);
+        window.top.location.href = '/sites/login.html';
     }
 }
 
@@ -246,7 +246,7 @@ async function fetchStatusChart() {
         chart2.data.datasets[0].borderColor = getComputedStyle(body).getPropertyValue('--sidebar-color').trim();
         chart2.update();
     } catch (error) {
-        console.error("Fehler beim Laden der Tabelle:", error);
+        window.top.location.href = '/sites/login.html';
     }
 }
 
@@ -356,6 +356,6 @@ async function fetchActivityChart() {
             }
         });
     } catch (error) {
-        console.error("Fehler beim Laden der Tabelle:", error);
+        window.top.location.href = '/sites/login.html';
     }
 }
