@@ -178,7 +178,7 @@ async function fetchTopicChart() {
                         'rgb(250, 211, 117)'
                     ],
                     hoverOffset: 4,
-                    borderWidth: 4
+                    borderWidth: 2
                 }]
             },
             options: {
@@ -231,7 +231,7 @@ async function fetchStatusChart() {
                         '#74C2C4'
                     ],
                     hoverOffset: 4,
-                    borderWidth: 4
+                    borderWidth: 2
                 }]
             },
             options: {
@@ -271,7 +271,7 @@ chart3 = new Chart(irgendwas, {
                 'rgb(227, 202, 237)'
             ],
             hoverOffset: 4,
-            borderWidth: 4
+            borderWidth: 2
         }]
     },
     options: {
