@@ -61,9 +61,11 @@ async function fetchOffenCount() {
                 "Authorization": "Bearer " + token
             }
         });
-        if (!res.ok) {
-            throw new Error(`HTTP ${res.status}`);
-        }
+    if (!res.ok) {
+        const error = new Error(`HTTP ${res.status}`);
+        error.status = res.status;
+        throw error;
+    }
 
         const data = await res.text();
 
@@ -71,7 +73,8 @@ async function fetchOffenCount() {
         document.querySelector("#offenLoader").style.opacity = "0";
 
     } catch (error) {
-        window.top.location.href = '/sites/login.html';
+        if(error.status == 403)
+            window.top.location.href = '/sites/login.html';
     }
 }
 
@@ -84,9 +87,11 @@ async function fetchBearbeitungCount() {
                 "Authorization": "Bearer " + token
             }
         });
-        if (!res.ok) {
-            throw new Error(`HTTP ${res.status}`);
-        }
+    if (!res.ok) {
+        const error = new Error(`HTTP ${res.status}`);
+        error.status = res.status;
+        throw error;
+    }
 
         const data = await res.text();
 
@@ -94,7 +99,8 @@ async function fetchBearbeitungCount() {
         document.querySelector("#bearbeitungLoader").style.opacity = "0";
 
     } catch (error) {
-        window.top.location.href = '/sites/login.html';
+        if(error.status == 403)
+            window.top.location.href = '/sites/login.html';
     }
 }
 
@@ -107,9 +113,11 @@ async function fetchArchiviertCount() {
                 "Authorization": "Bearer " + token
             }
         });
-        if (!res.ok) {
-            throw new Error(`HTTP ${res.status}`);
-        }
+    if (!res.ok) {
+        const error = new Error(`HTTP ${res.status}`);
+        error.status = res.status;
+        throw error;
+    }
 
         const data = await res.text();
 
@@ -117,7 +125,8 @@ async function fetchArchiviertCount() {
         document.querySelector("#archiviertLoader").style.opacity = "0";
 
     } catch (error) {
-        window.top.location.href = '/sites/login.html';
+        if(error.status == 403)
+            window.top.location.href = '/sites/login.html';
     }
 }
 
@@ -130,9 +139,11 @@ async function fetchGeschlssenCount() {
                 "Authorization": "Bearer " + token
             }
         });
-        if (!res.ok) {
-            throw new Error(`HTTP ${res.status}`);
-        }
+    if (!res.ok) {
+        const error = new Error(`HTTP ${res.status}`);
+        error.status = res.status;  // 👈 speichere den Statuscode direkt im Error-Objekt
+        throw error;
+    }
 
         const data = await res.text();
 
@@ -140,7 +151,8 @@ async function fetchGeschlssenCount() {
         document.querySelector("#geschlossenLoader").style.opacity = "0";
 
     } catch (error) {
-        window.top.location.href = '/sites/login.html';
+        if(error.status == 403)
+            window.top.location.href = '/sites/login.html';
     }
 }
 
@@ -153,9 +165,11 @@ async function fetchTopicChart() {
                 "Authorization": "Bearer " + token
             }
         });
-        if (!res.ok) {
-            throw new Error(`HTTP ${res.status}`);
-        }
+    if (!res.ok) {
+        const error = new Error(`HTTP ${res.status}`);
+        error.status = res.status;  // 👈 speichere den Statuscode direkt im Error-Objekt
+        throw error;
+    }
         const data = await res.json();
 
         document.querySelector("#topicLoader").style.opacity = "0";
@@ -193,7 +207,8 @@ async function fetchTopicChart() {
         chart1.data.datasets[0].borderColor = getComputedStyle(body).getPropertyValue('--sidebar-color').trim();
         chart1.update();
     } catch (error) {
-        window.top.location.href = '/sites/login.html';
+        if(error.status == 403)
+            window.top.location.href = '/sites/login.html';
     }
 }
 
@@ -208,9 +223,11 @@ async function fetchStatusChart() {
                 "Authorization": "Bearer " + token
             }
         });
-        if (!res.ok) {
-            throw new Error(`HTTP ${res.status}`);
-        }
+    if (!res.ok) {
+        const error = new Error(`HTTP ${res.status}`);
+        error.status = res.status;  // 👈 speichere den Statuscode direkt im Error-Objekt
+        throw error;
+    }
         const data = await res.json();
 
         document.querySelector("#bearbeiterLoader").style.opacity = "0";
@@ -246,7 +263,8 @@ async function fetchStatusChart() {
         chart2.data.datasets[0].borderColor = getComputedStyle(body).getPropertyValue('--sidebar-color').trim();
         chart2.update();
     } catch (error) {
-        window.top.location.href = '/sites/login.html';
+        if(error.status == 403)
+            window.top.location.href = '/sites/login.html';
     }
 }
 
@@ -297,9 +315,11 @@ async function fetchActivityChart() {
                 "Authorization": "Bearer " + token
             }
         });
-        if (!res.ok) {
-            throw new Error(`HTTP ${res.status}`);
-        }
+    if (!res.ok) {
+        const error = new Error(`HTTP ${res.status}`);
+        error.status = res.status;  // 👈 speichere den Statuscode direkt im Error-Objekt
+        throw error;
+    }
         const data = await res.json();
 
         document.querySelector("#activityLoader").style.opacity = "0";
@@ -356,6 +376,7 @@ async function fetchActivityChart() {
             }
         });
     } catch (error) {
-        window.top.location.href = '/sites/login.html';
+        if(error.status == 403)
+            window.top.location.href = '/sites/login.html';
     }
 }

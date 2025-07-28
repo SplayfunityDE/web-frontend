@@ -1,9 +1,11 @@
+const token = localStorage.getItem("jwt") ? localStorage.getItem("jwt") : sessionStorage.getItem("jwt");
 const body = document.querySelector("body"),
     sidebar = body.querySelector(".sidebar"),
     toggle = body.querySelector(".toggle"),
     searchBtn = body.querySelector(".search-box"),
     modeSwitch = body.querySelector(".toggle-switch"),
-    modeText = body.querySelector(".mode-text");
+    modeText = body.querySelector(".mode-text"),
+    logoutLoader = body.querySelector(".loader");
 
 toggle.addEventListener("click", () => {
     sidebar.classList.toggle("close");
@@ -46,8 +48,26 @@ navLinks.forEach(link => {
 const logoutLink = document.querySelector(".nav-bottom-link");
 
 logoutLink.addEventListener("click", async () => {
-    localStorage.removeItem("jwt");
-    window.location.href = '/sites/login.html';
+    logoutLoader.style.opacity = "1";
+    body.querySelector(".nav-bottom-link i").style.opacity = "0";
+    body.querySelector(".nav-bottom-link span").style.opacity = "0";
+    localStorage.getItem("jwt") ? localStorage.removeItem("jwt") : sessionStorage.removeItem("jwt");
+        try {
+        const res = await fetch("https://api.splayfer.de/authentication/accounts/logout", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            }
+        });
+        if (!res.ok) {
+            throw new Error(`HTTP ${res.status}`);
+        }
+        window.location.href = '/sites/login.html';
+        console.log("ok");
+    } catch (error) {
+        window.top.location.href = '/sites/login.html';
+    }
 });
 
 document.addEventListener("DOMContentLoaded", () => {
