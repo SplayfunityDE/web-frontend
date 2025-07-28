@@ -159,10 +159,12 @@ tr:hover {
     margin: 10px;
 }
 
-.empty,
+.empty {
+    left: calc(50vw - (200px / 2));
+}
+
 .loader {
-    left: 50vw;
-    transform: translateX(-50%);
+    left: calc(50vw - (40px / 2));
 }
 
 /* HTML: <div class="loader"></div> */
