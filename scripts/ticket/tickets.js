@@ -139,6 +139,7 @@ async function fetchTable(searchPattern) {
         }
 
         if (count == 0) {
+            tbody.classList.add("empty-table");
             for (let mainIndex = 0; mainIndex < emptyRowCount; mainIndex++) {
                 var row = tbody.insertRow();
                 const cell = row.insertCell();

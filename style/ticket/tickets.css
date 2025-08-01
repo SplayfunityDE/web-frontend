@@ -105,8 +105,16 @@ td:hover {
     cursor: pointer;
 }
 
+.empty-table td:hover {
+    cursor: default;
+}
+
 tr:hover {
     background-color: var(--primary-color-light);
+}
+
+.empty-table :hover {
+    background-color: transparent;
 }
 
 .search-box {
