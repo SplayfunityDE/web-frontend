@@ -52,11 +52,11 @@ async function fetchTable(searchPattern) {
             }
         });
 
-    if (!res.ok) {
-        const error = new Error(`HTTP ${res.status}`);
-        error.status = res.status;  // 👈 speichere den Statuscode direkt im Error-Objekt
-        throw error;
-    }
+        if (!res.ok) {
+            const error = new Error(`HTTP ${res.status}`);
+            error.status = res.status;  // 👈 speichere den Statuscode direkt im Error-Objekt
+            throw error;
+        }
 
         const data = await res.json();
 
@@ -167,6 +167,8 @@ async function fetchTable(searchPattern) {
             }
             document.querySelector(".empty").style.opacity = "1";
             caption.innerHTML = "";
+        } else {
+            loadResizeStuff();
         }
 
         table.style.opacity = "1";
@@ -195,7 +197,7 @@ async function fetchTable(searchPattern) {
         });
 
     } catch (error) {
-        if(error.status == 403)
+        if (error.status == 403)
             window.top.location.href = '/sites/login.html';
     }
     isFetching = false;
@@ -212,7 +214,7 @@ async function reloadTable(searchPattern) {
 
 //code for resizable table content
 
-window.onload = function () {
+function loadResizeStuff() {
     (function () {
         var col_element,
             next_element,

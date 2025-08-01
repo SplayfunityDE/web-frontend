@@ -43,8 +43,6 @@ body.dark {
     padding-bottom: 40px;
 }
 
-thead {}
-
 tfoot {
     background-color: var(--primary-color);
     color: #fff;
@@ -143,8 +141,6 @@ tr:hover {
     align-self: center;
     margin: 10px;
 }
-
-.content {}
 
 .empty {
     opacity: 0;
@@ -254,7 +250,7 @@ table caption i {
     position: absolute;
     top: 0;
     left: 0;
-    width: 4px;
+    width: 3px;
     height: 102%;
     background: transparent;
     cursor: col-resize;
@@ -277,7 +273,7 @@ table caption i {
 
 .y_resize:hover {
     background: var(--text-color);
-    opacity: 0.5;
+    opacity: 0.3;
 }
 
 .gp-header {
