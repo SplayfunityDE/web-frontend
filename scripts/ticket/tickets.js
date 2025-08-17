@@ -7,7 +7,7 @@ const emptyRowCount = 4;
 
 let isFetching = false;
 
-if (sessionStorage.getItem("darkmode") == "true") {
+if (localStorage.getItem("darkmode") == "true") {
     body.classList.toggle("dark");
 }
 
