@@ -11,7 +11,7 @@ toggle.addEventListener("click", () => {
     sidebar.classList.toggle("close");
 });
 
-if (sessionStorage.getItem("darkmode") == "true") {
+if (localStorage.getItem("darkmode") == "true") {
     body.classList.toggle("dark");
 }
 
@@ -21,11 +21,11 @@ modeSwitch.addEventListener("click", () => {
     if (body.classList.contains("dark")) {
         modeText.innerHTML = "Light Mode";
         iframe.contentWindow.postMessage({ dark: true }, "*");
-        sessionStorage.setItem("darkmode", true);
+        localStorage.setItem("darkmode", true);
     } else {
         modeText.innerHTML = "Dark Mode";
         iframe.contentWindow.postMessage({ dark: false }, "*");
-        sessionStorage.setItem("darkmode", false);
+        localStorage.setItem("darkmode", false);
     }
 });
 
