@@ -29,6 +29,7 @@ modeSwitch.addEventListener("click", () => {
     }
 });
 
+
 const navLinks = document.querySelectorAll(".nav-link");
 const homeSection = document.querySelector(".home");
 

@@ -16,6 +16,9 @@
     --toggle-color: #DDD;
     --text-color: #707070;
 
+    --normal-bar-width: 88px;
+    --mobile-bar-width: 5px;
+
     --tran-02: all 0.2s ease;
     --tran-03: all 0.3s ease;
     --tran-04: all 0.4s ease;
@@ -51,7 +54,19 @@ body.dark {
 }
 
 .sidebar.close {
-    width: 88px;
+    width: var(--normal-bar-width)
+}
+
+/* ======== Mobile View ======== */
+@media (max-width: 768px) {
+    .sidebar.close {
+        width: var(--mobile-bar-width);
+    }
+    .sidebar.close .bx,
+    .sidebar.close .image,
+    .sidebar.close .switch {
+        opacity: 0;
+    }
 }
 
 /* ======== Resuable CSS ======== */
@@ -292,12 +307,21 @@ body.dark .switch::before {
 }
 
 .home iframe {
-    padding: 8px 40px;
+    padding-left: 2rem;
+    padding-right: 1rem;
 }
 
 .sidebar.close~.home {
     left: 88px;
     width: calc(100% - 88px);
+}
+
+/* ======== Mobile View ======== */
+@media (max-width: 768px) {
+.sidebar.close~.home {
+    left: var(--mobile-bar-width);
+    width: calc(100% - var(--mobile-bar-width));
+}
 }
 
 iframe {
@@ -312,11 +336,6 @@ iframe {
     border: none;
     /* Keine Border */
 }
-
-.nav-bottom-link .loader{
-
-}
-
 
 /* HTML: <div class="loader"></div> */
 .loader {
