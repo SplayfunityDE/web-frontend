@@ -82,7 +82,8 @@ body.dark {
 /* ======== Mobile View ======== */
 @media (max-width: calc(768px - 3rem - 10px)) {
     .screen {
-        margin-right: 20px;
+        margin-right: 10px;
+        margin-bottom: 30px;
     }
 }
 

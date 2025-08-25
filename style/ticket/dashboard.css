@@ -250,6 +250,13 @@ body.dark .menu-bar .mode i.sun {
     opacity: 1;
 }
 
+/* ======== Mobile View ======== */
+@media (max-width: 768px) {
+    .sidebar.close .menu-bar .mode i.sun {
+    opacity: 0;
+    }
+}
+
 body.dark .menu-bar .mode i.moon {
     opacity: 0;
 }
@@ -315,7 +322,7 @@ body.dark .switch::before {
 /* ======== Mobile View ======== */
 @media (max-width: 768px) {
 .home iframe {
-    padding-left: 1.5rem;
+    padding-left: 1rem;
     padding-right: 0.2rem;
 }
 }
