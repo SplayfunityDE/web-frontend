@@ -61,6 +61,7 @@ body.dark {
 @media (max-width: 768px) {
     .sidebar.close {
         width: var(--mobile-bar-width);
+        padding: 0;
     }
     .sidebar.close .bx,
     .sidebar.close .image,
@@ -309,6 +310,14 @@ body.dark .switch::before {
 .home iframe {
     padding-left: 2rem;
     padding-right: 1rem;
+}
+
+/* ======== Mobile View ======== */
+@media (max-width: 768px) {
+.home iframe {
+    padding-left: 1.5rem;
+    padding-right: 0.2rem;
+}
 }
 
 .sidebar.close~.home {

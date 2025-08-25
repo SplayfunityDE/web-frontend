@@ -6,7 +6,7 @@ var chart1,
     chart2,
     chart3;
 
-if (sessionStorage.getItem("darkmode") == "true") {
+if (localStorage.getItem("darkmode") == "true") {
     body.classList.toggle("dark");
 }
 

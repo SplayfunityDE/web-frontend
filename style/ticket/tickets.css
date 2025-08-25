@@ -120,7 +120,6 @@ tr:hover {
     flex-direction: row;
     background: var(--primary-color-light);
     border-radius: 6px;
-    transition: var(--tran-03);
     height: 30px;
     margin-bottom: 10px;
 }
@@ -134,12 +133,13 @@ tr:hover {
     font-size: 16px;
     font-weight: 500;
     background: var(--primary-color-light);
-    transition: var(--tran-03);
+    color: var(--text-color);
 }
 
 .search-box i {
     align-self: center;
     margin: 10px;
+    color: var(--text-color);
 }
 
 .empty {

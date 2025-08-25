@@ -19,6 +19,9 @@
     --shadow-color: rgb(112, 112, 112, 0.1);
     --shadow-color-hover: rgb(112, 112, 112, 0.4);
 
+    --normal-bar-width: 88px;
+    --mobile-bar-width: 5px;
+
     --tran-02: all 0.2s ease;
     --tran-03: all 0.3s ease;
     --tran-04: all 0.4s ease;
@@ -75,6 +78,14 @@ body.dark {
     box-shadow: 10px 7px 7px 7px var(--shadow-color);
     transition: 0.3s;
 }
+
+/* ======== Mobile View ======== */
+@media (max-width: calc(768px - 3rem - 10px)) {
+    .screen {
+        margin-right: 20px;
+    }
+}
+
 
 #number {
     height: 200px;
