@@ -11,6 +11,10 @@ toggle.addEventListener("click", () => {
     sidebar.classList.toggle("close");
 });
 
+if (innerWidth <= 768) {
+    sidebar.classList.toggle("close");
+}
+
 if (localStorage.getItem("darkmode") == "true") {
     body.classList.toggle("dark");
 }
