@@ -115,6 +115,14 @@ body.dark {
     height: 150px;
 }
 
+/* ======== Mobile View ======== */
+@media (max-width: calc(768px - 3rem - 10px)) {
+    #activityChart {
+    width: auto;
+    height: auto;
+}
+}
+
 /* HTML: <div class="loader"></div> */
 .loader {
     transition: 0.2s;

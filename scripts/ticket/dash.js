@@ -351,7 +351,7 @@ async function fetchActivityChart() {
                     borderWidth: 3,
                     pointStyle: "circle",
                     pointHitRadius: 20,
-                    pointRadius: 5,
+                    pointRadius: 4,
                     pointBackgroundColor: 'rgb(141, 171, 186, 0.8)'
                 }]
             },
