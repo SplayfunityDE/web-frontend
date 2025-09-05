@@ -1,14 +1,16 @@
 const token = localStorage.getItem("jwt") ? localStorage.getItem("jwt") : sessionStorage.getItem("jwt");
 const body = document.querySelector("body"),
     sidebar = body.querySelector(".sidebar"),
-    toggle = body.querySelector(".toggle"),
+    toggle = body.querySelectorAll(".toggle"),
     searchBtn = body.querySelector(".search-box"),
     modeSwitch = body.querySelector(".toggle-switch"),
     modeText = body.querySelector(".mode-text"),
     logoutLoader = body.querySelector(".loader");
-
-toggle.addEventListener("click", () => {
+    
+toggle.forEach(element => {
+   element.addEventListener("click", () => {
     sidebar.classList.toggle("close");
+    }); 
 });
 
 if (innerWidth <= 768) {

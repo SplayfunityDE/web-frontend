@@ -161,6 +161,28 @@ header .image-text .header-text {
     color: var(--sidebar-color);
     font-size: 22px;
     transition: var(--tran-03);
+    cursor: pointer;
+}
+
+.sidebar header .mobile {
+    opacity: 0;
+}
+
+/* ======== Mobile View ======== */
+@media (max-width: 768px) {
+        .sidebar.close header .toggle {
+        opacity: 0;
+    }
+    .sidebar.close header .mobile {
+        opacity: 1;
+        height: 60px;
+        width: 60px;
+        position: fixed;
+        top: auto;
+        right: auto;
+        left: 20px;
+        bottom: 0px;
+    }
 }
 
 .sidebar.close header .toggle {
