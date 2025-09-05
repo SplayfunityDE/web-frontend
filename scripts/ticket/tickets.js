@@ -12,9 +12,6 @@ if (localStorage.getItem("darkmode") == "true") {
 }
 
 window.addEventListener('message', (event) => {
-    // Optional: Herkunft prüfen (für Sicherheit)
-    // if (event.origin !== 'https://deine-domain.de') return;
-
     if (typeof event.data.dark !== 'undefined') {
         body.classList.toggle("dark");
     }
@@ -87,16 +84,23 @@ async function fetchTable(searchPattern) {
                 var row = tbody.insertRow();
                 row.setAttribute("data-id", element.post);
 
+                var cell;
+
+                //empty cell for checkbox
+                cell = row.insertCell();
+                cell.innerHTML = "<input type=\"checkbox\" id=\"" + element.channel + "\">";
+
                 //kanal
-                var cell = row.insertCell();
+                cell = row.insertCell();
                 cell.textContent = "# " + element.channelTxt;
+                cell.classList.add("kanal");
 
                 //nutzer
-                var cell = row.insertCell();
+                cell = row.insertCell();
                 cell.textContent = element.creatorTxt;
 
                 //erstelldatum
-                var cell = row.insertCell();
+                cell = row.insertCell();
                 const options = {
                     year: "numeric",
                     month: "long",
@@ -113,11 +117,11 @@ async function fetchTable(searchPattern) {
                         break;
                     case 3: type = "⛔ Report";
                 }
-                var cell = row.insertCell();
+                cell = row.insertCell();
                 cell.textContent = type;
 
                 //bearbeiter
-                var cell = row.insertCell();
+                cell = row.insertCell();
                 cell.textContent = element.supporterTxt;
 
             }
@@ -189,7 +193,7 @@ async function fetchTable(searchPattern) {
                 reloadTable();
             });
 
-        const dataRows = document.querySelectorAll("tbody td");
+        const dataRows = document.querySelectorAll(".kanal");
         dataRows.forEach(element => {
             element.addEventListener("click", async () => {
                 window.open("https://discord.com/channels/873506353551925308/" + element.parentElement.getAttribute("data-id"));
