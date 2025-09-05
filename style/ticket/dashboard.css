@@ -17,7 +17,7 @@
     --text-color: #707070;
 
     --normal-bar-width: 88px;
-    --mobile-bar-width: 5px;
+    --mobile-bar-width: 0px;
 
     --tran-02: all 0.2s ease;
     --tran-03: all 0.3s ease;
@@ -170,7 +170,7 @@ header .image-text .header-text {
 
 /* ======== Mobile View ======== */
 @media (max-width: 768px) {
-        .sidebar.close header .toggle {
+    .sidebar.close header .toggle {
         opacity: 0;
     }
     .sidebar.close header .mobile {
