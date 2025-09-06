@@ -81,7 +81,7 @@ body.dark {
 }
 
 /* ======== Mobile View ======== */
-@media (max-width: calc(var(--max-mobile-width) - 3rem - 10px)) {
+@media (max-width: calc(768px - 3rem - 10px)) {
     .screen {
         margin-right: 10px;
         margin-bottom: 30px;
@@ -117,7 +117,7 @@ body.dark {
 }
 
 /* ======== Mobile View ======== */
-@media (max-width: calc(var(--max-mobile-width) - 3rem - 10px)) {
+@media (max-width: calc(768px - 3rem - 10px)) {
     #activityChart {
     width: auto;
     height: auto;

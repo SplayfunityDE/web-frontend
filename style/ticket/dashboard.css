@@ -59,7 +59,7 @@ body.dark {
 }
 
 /* ======== Mobile View ======== */
-@media (max-width: var(--max-mobile-width)) {
+@media (max-width: 768px) {
     .sidebar.close {
         width: var(--mobile-bar-width);
         padding: 0;
@@ -170,7 +170,7 @@ header .image-text .header-text {
 }
 
 /* ======== Mobile View ======== */
-@media (max-width: var(--max-mobile-width)) {
+@media (max-width: 768px) {
     .sidebar.close header .toggle {
         opacity: 0;
     }
@@ -274,7 +274,7 @@ body.dark .menu-bar .mode i.sun {
 }
 
 /* ======== Mobile View ======== */
-@media (max-width: var(--max-mobile-width)) {
+@media (max-width: 768px) {
     .sidebar.close .menu-bar .mode i.sun {
     opacity: 0;
     }
@@ -343,7 +343,7 @@ body.dark .switch::before {
 }
 
 /* ======== Mobile View ======== */
-@media (max-width: var(--max-mobile-width)) {
+@media (max-width: 768px) {
 .home iframe {
     padding-left: 1rem;
     padding-right: 0.2rem;
@@ -356,7 +356,7 @@ body.dark .switch::before {
 }
 
 /* ======== Mobile View ======== */
-@media (max-width: var(--max-mobile-width)) {
+@media (max-width: 768px) {
 .sidebar.close~.home {
     left: var(--mobile-bar-width);
     width: calc(100% - var(--mobile-bar-width));
