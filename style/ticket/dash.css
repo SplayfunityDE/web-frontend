@@ -8,7 +8,6 @@
 }
 
 :root {
-
     --body-color: #E4E9F7;
     --sidebar-color: #FFF;
     --primary-color: #3573a5;
@@ -20,7 +19,9 @@
     --shadow-color-hover: rgb(112, 112, 112, 0.4);
 
     --normal-bar-width: 88px;
-    --mobile-bar-width: 5px;
+    --mobile-bar-width: 0px;
+
+    --max-mobile-width: 768px;
 
     --tran-02: all 0.2s ease;
     --tran-03: all 0.3s ease;
@@ -80,7 +81,7 @@ body.dark {
 }
 
 /* ======== Mobile View ======== */
-@media (max-width: calc(768px - 3rem - 10px)) {
+@media (max-width: calc(var(--max-mobile-width) - 3rem - 10px)) {
     .screen {
         margin-right: 10px;
         margin-bottom: 30px;
@@ -116,7 +117,7 @@ body.dark {
 }
 
 /* ======== Mobile View ======== */
-@media (max-width: calc(768px - 3rem - 10px)) {
+@media (max-width: calc(var(--max-mobile-width) - 3rem - 10px)) {
     #activityChart {
     width: auto;
     height: auto;

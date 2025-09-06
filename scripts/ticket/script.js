@@ -6,6 +6,8 @@ const body = document.querySelector("body"),
     modeSwitch = body.querySelector(".toggle-switch"),
     modeText = body.querySelector(".mode-text"),
     logoutLoader = body.querySelector(".loader");
+//layout
+const maxMobileWidth = 768;
     
 toggle.forEach(element => {
    element.addEventListener("click", () => {
@@ -13,7 +15,7 @@ toggle.forEach(element => {
     }); 
 });
 
-if (innerWidth <= 768) {
+if (innerWidth <= maxMobileWidth) {
     sidebar.classList.toggle("close");
 }
 
@@ -45,7 +47,7 @@ navLinks.forEach(link => {
         try {
             const response = await fetch(`/sites/ticket/${page}.html`);
             homeSection.innerHTML = "<iframe id=\"contentFrame\" src=\" /sites/ticket/" + page + ".html\" width=\"100 % \" height=\"100 % \" style=\"border: none;\"></iframe>"
-            if (innerWidth <= 768) { //close sidebar after click on mobile view
+            if (innerWidth <= maxMobileWidth) { //close sidebar after click on mobile view
                 sidebar.classList.toggle("close");
             }
         } catch (err) {
