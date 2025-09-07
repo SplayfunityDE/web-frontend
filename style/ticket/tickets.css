@@ -179,7 +179,7 @@ tr:hover {
 
 input[type="checkbox"] {
     accent-color: var(--primary-color);
-    transform: scale(1.5);
+    transform: scale(1.6);
     outline: none;
 }
 
