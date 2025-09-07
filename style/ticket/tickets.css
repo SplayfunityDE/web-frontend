@@ -180,6 +180,7 @@ tr:hover {
 input[type="checkbox"] {
     accent-color: var(--primary-color);
     transform: scale(1.5);
+    outline: none;
 }
 
 /* HTML: <div class="loader"></div> */

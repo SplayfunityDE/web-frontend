@@ -1,9 +1,12 @@
 const body = document.querySelector("body");
-var currentPage = 1;
 const maxPerPage = 15;
 const leftArrowTxt = "<i class='bx bx-fw  bxs-arrow-left-stroke'></i>";
 const rightArrowTxt = "<i class='bx bx-fw  bxs-arrow-right-stroke'></i>";
 const emptyRowCount = 4;
+
+var currentPage = 1;
+var availableTickets; //saves all tickets from current view
+var selectedTickets; //saves only tickets selected via checkbox
 
 let isFetching = false;
 
@@ -22,6 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function fetchTable(searchPattern) {
+    availableTickets = new Array(); //reset listed tickets
+    selectedTickets = new Array(); //reset selected tickets
+
     const table = document.querySelector("table");
     const tbody = document.querySelector("table tbody");
     tbody.innerHTML = "";
@@ -79,7 +85,8 @@ async function fetchTable(searchPattern) {
                 return;
 
             i++;
-            if (i > (currentPage * maxPerPage) - maxPerPage && i <= currentPage * maxPerPage) {
+            if (i > (currentPage * maxPerPage) - maxPerPage && i <= currentPage * maxPerPage) { //check if element is in page range, if not it is skipped
+                availableTickets.push(element.channel);
 
                 var row = tbody.insertRow();
                 row.setAttribute("data-id", element.post);
@@ -205,6 +212,7 @@ async function fetchTable(searchPattern) {
             window.top.location.href = '/sites/login.html';
     }
     isFetching = false;
+    addCheckboxListeners();
 }
 
 async function reloadTable(searchPattern) {
@@ -332,12 +340,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         debounceTimeout = setTimeout(() => {
 
-            // Verhindert das Starten einer neuen Anfrage, wenn bereits eine läuft
+            // Verhindert das Starten einer neuen Anfrage, wenn bereits eine läuft 
             if (isFetching) {
                 return;
             }
-
-            console.log(search.value);
 
             if (!search.value.length == 0)
                 reloadTable(search.value);
@@ -347,3 +353,31 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 500);  // 500 ms Wartezeit nach der letzten Eingabe
     });
 });
+
+//checkbox logic
+function addCheckboxListeners() {
+    const checkboxes = document.querySelectorAll("input[type=\"checkbox\"]");
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener("change", async () => {
+            if (checkbox.id == "all") {
+                if (checkbox.checked) {
+                    selectedTickets = availableTickets;
+                    checkboxes.forEach(box => {
+                        box.checked = true;
+                    });
+                } else {
+                    selectedTickets = [];
+                    checkboxes.forEach(box => {
+                        box.checked = false;
+                    });
+                }
+            } else {
+                if (checkbox.checked) {
+                    selectedTickets.push(checkbox.id);
+                } else {
+                    selectedTickets = selectedTickets.filter(id => id !== checkbox.id);
+                }
+            }
+        }); 
+    });
+} 
