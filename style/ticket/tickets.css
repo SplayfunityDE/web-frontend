@@ -312,3 +312,36 @@ table caption i {
     color: #333;
     margin: 0px 0px;
 }
+
+.bar {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    height: 0;
+    transition: 0.1s;
+}
+
+input[type="button"] {
+    font-size: 15px;
+    font-weight: 500;
+    height: 33px;
+    padding-inline: 15px;
+    margin-top: 40px;
+    margin-bottom: 50px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: black;
+    background-color: var(--primary-color-light);
+    border-color: var(--toggle-color);
+    border-width: 2px;
+    border-style: solid;
+    transition: 0.2s;
+}
+
+input[type="button"]:hover {
+    padding-inline: 20px;
+    height: 35px;
+    transition: 0.2s;
+}

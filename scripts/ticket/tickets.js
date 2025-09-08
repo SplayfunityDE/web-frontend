@@ -1,4 +1,5 @@
 const body = document.querySelector("body");
+const menubar = document.querySelector(".bar");
 const maxPerPage = 15;
 const leftArrowTxt = "<i class='bx bx-fw  bxs-arrow-left-stroke'></i>";
 const rightArrowTxt = "<i class='bx bx-fw  bxs-arrow-right-stroke'></i>";
@@ -355,7 +356,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 //checkbox logic
-function addCheckboxListeners() {
+async function addCheckboxListeners() {
     const checkboxes = document.querySelectorAll("input[type=\"checkbox\"]");
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener("change", async () => {
@@ -378,6 +379,18 @@ function addCheckboxListeners() {
                     selectedTickets = selectedTickets.filter(id => id !== checkbox.id);
                 }
             }
+            updateButtonBar();
         }); 
     });
-} 
+}
+
+//button bar logic
+async function updateButtonBar() {
+    if (selectedTickets[0] != null) {
+        menubar.style.height = "50px";
+        menubar.style.opacity = "1";
+    } else {
+        menubar.style.height = "0";
+        menubar.style.opacity = "0";
+    }
+}
