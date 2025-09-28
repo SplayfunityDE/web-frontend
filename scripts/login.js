@@ -17,28 +17,15 @@ async function fetchCredentials(username, value, remember) {
     const buttonSpinner = document.querySelector(".loader");
     const buttonText = document.querySelector(".btntext");
     const errorField = document.querySelector(".error");
-    try {
-        const response = (await fetch("https://api.splayfer.de/authentication/accounts/login?remember=" + remember, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username: username,
-                value: value,
-            })
-        })
-            .then(res => {
-                return res.json();
-            })
-            .then(data => {
-                const token = data.token;
-                const storage = remember == true ? localStorage : sessionStorage;
-                storage.setItem("jwt", token);
-                window.location.href = '/sites/ticket/dashboard.html';
-            })
-        );
-    } catch (error) {
+    
+    const response = await Global.loginRequest(username, value, remember);
+
+    if (response !== false) {
+        var token = response.token;
+        const storage = remember == true ? localStorage : sessionStorage;
+        storage.setItem("jwt", token);
+        window.location.href = '/sites/ticket/dashboard.html';
+    } else {
         const fields = document.querySelectorAll(".input-field input");
         console.log(fields);
         fields.forEach(field => {
@@ -49,7 +36,6 @@ async function fetchCredentials(username, value, remember) {
         errorField.innerHTML = "Ungültige Anmeldeinformationen"
         user = false;
         pw = false;
-        console.error(error);
     }
 }
 

@@ -394,3 +394,36 @@ async function updateButtonBar() {
         menubar.style.opacity = "0";
     }
 }
+
+body.querySelector(".bar_open").addEventListener("click", async () => {
+    selectedTickets.forEach(element => {
+        window.open("https://discord.com/channels/873506353551925308/" + element);
+    });
+});
+
+body.querySelector(".bar_claim").addEventListener("click", async () => {
+    selectedTickets.forEach(element => {
+        try {
+            const token = localStorage.getItem("jwt") ? localStorage.getItem("jwt") : sessionStorage.getItem("jwt");
+            const res = fetch("https://api.splayfer.de/ticket/" + element, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + token
+                },
+                body: {
+                    "supporter": ""
+                }
+            });
+            if (!res.ok) {
+                const error = new Error(`HTTP ${res.status}`);
+                error.status = res.status;  // 👈 speichere den Statuscode direkt im Error-Objekt
+                throw error;
+            }
+            console.log("Claimer erfolgreich geändert!");
+
+        } catch (error) {
+            console.log("Fehler beim Bearbeiten der Anfrage");
+        } 
+    });
+});

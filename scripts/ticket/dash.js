@@ -1,6 +1,6 @@
 const body = document.querySelector("body");
 const topic = document.getElementById('topicChart');
-let token;
+var token;
 
 var chart1,
     chart2,
