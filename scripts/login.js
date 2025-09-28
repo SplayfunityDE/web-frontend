@@ -21,9 +21,6 @@ async function fetchCredentials(username, value, remember) {
     const response = await Global.loginRequest(username, value, remember);
 
     if (response !== false) {
-        var token = response.token;
-        const storage = remember == true ? localStorage : sessionStorage;
-        storage.setItem("jwt", token);
         window.location.href = '/sites/ticket/dashboard.html';
     } else {
         const fields = document.querySelectorAll(".input-field input");

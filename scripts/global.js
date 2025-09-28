@@ -6,8 +6,8 @@ window.Global = {
         return localStorage.getItem("jwt") ? localStorage.getItem("jwt") : sessionStorage.getItem("jwt");
     },
 
-    restRequest: async function (url, method, jwtToken, body) {
-        jwtToken = this.getJwtToken();
+    restRequest: async function (url, method, body) {
+        jwtToken = await this.getJwtToken();
         try {
             const response = await fetch(url, {
                 method: method,
@@ -32,16 +32,21 @@ window.Global = {
     },
 
     loginRequest: async function (username, password, remember) {
-        const response = await this.restRequest("https://api.splayfer.de/authentication/accounts/login?remember=" + remember, "POST", null, {
+        const response = await this.restRequest("https://api.splayfer.de/authentication/accounts/login?remember=" + remember, "POST", {
             "username": username,
             "value": password
         });
+        if(response !== false) {
+            const storage = remember == true ? localStorage : sessionStorage;
+            storage.setItem("jwt", response.token);
+        }
         return response;
     },
 
     logoutRequest: async function () {
         jwtToken = await this.getJwtToken();
         const response = await this.restRequest("https://api.splayfer.de/authentication/accounts/logout", "GET", jwtToken, null);
+        localStorage.getItem("jwt") ? localStorage.removeItem("jwt") : sessionStorage.removeItem("jwt");
         return response;
     }
 

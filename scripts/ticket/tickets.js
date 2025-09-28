@@ -46,28 +46,15 @@ async function fetchTable(searchPattern) {
             break;
     }
     isFetching = true;
-    try {
-        const token = localStorage.getItem("jwt") ? localStorage.getItem("jwt") : sessionStorage.getItem("jwt");
-        const res = await fetch("https://api.splayfer.de/ticket/list/" + urlStr, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + token
-            }
-        });
 
-        if (!res.ok) {
-            const error = new Error(`HTTP ${res.status}`);
-            error.status = res.status;  // 👈 speichere den Statuscode direkt im Error-Objekt
-            throw error;
-        }
+    const response = await Global.restRequest("https://api.splayfer.de/ticket/list/" + urlStr, "GET", null);
 
-        const data = await res.json();
+    if (response !== false) {
 
         var i = 0;
         var count = 0;
 
-        data.forEach(element => {
+        response.forEach(element => {
             switch (field) {
                 case "offen":
                     if (element.supporter)
@@ -208,12 +195,12 @@ async function fetchTable(searchPattern) {
             });
         });
 
-    } catch (error) {
-        if (error.status == 403)
-            window.top.location.href = '/sites/login.html';
+    } else {
+        //if (error.status == 403)
+            //window.top.location.href = '/sites/login.html';
     }
     isFetching = false;
-    addCheckboxListeners();
+    addCheckboxListeners();    
 }
 
 async function reloadTable(searchPattern) {
@@ -402,28 +389,18 @@ body.querySelector(".bar_open").addEventListener("click", async () => {
 });
 
 body.querySelector(".bar_claim").addEventListener("click", async () => {
-    selectedTickets.forEach(element => {
-        try {
-            const token = localStorage.getItem("jwt") ? localStorage.getItem("jwt") : sessionStorage.getItem("jwt");
-            const res = fetch("https://api.splayfer.de/ticket/" + element, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer " + token
-                },
-                body: {
-                    "supporter": ""
-                }
-            });
-            if (!res.ok) {
-                const error = new Error(`HTTP ${res.status}`);
-                error.status = res.status;  // 👈 speichere den Statuscode direkt im Error-Objekt
-                throw error;
-            }
-            console.log("Claimer erfolgreich geändert!");
+    for (element of selectedTickets) {
 
-        } catch (error) {
-            console.log("Fehler beim Bearbeiten der Anfrage");
-        } 
-    });
+        const infoRequest = await restRequest("https://api.splayfer.de/authentication/accounts" + localStorage.getItem("jwt") ? localStorage.removeItem("jwt") : sessionStorage.removeItem("jwt"), "GET", null);
+        if (ticketRequest === false)
+            return;
+        var supporter = ticketRequest.discordUserId;
+
+        const claimRequest = await restRequest("https://api.splayfer.de/ticket/" + element, "PUT", {
+            "supporter": supporter
+        });
+        if (claimRequest === false)
+            return;
+        console.log("Claimer erfolgreich geändert!");
+    }
 });
