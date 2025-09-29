@@ -58,7 +58,7 @@ async function fetchCount(type) {
     const response = await Global.restRequest("https://api.splayfer.de/ticket/count/" + type, "GET", null);
     if (response !== null) {
         document.querySelector(".screen .number" + type).innerHTML = response;
-        document.querySelector("#offenLoader").style.opacity = "0";
+        document.querySelector("#" + type + "Loader").style.opacity = "0";
     } else {
         window.top.location.href = '/sites/login.html';
     }
