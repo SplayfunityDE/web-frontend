@@ -144,7 +144,7 @@ async function fetchTable(searchPattern) {
                 const cell = row.insertCell();
                 cell.textContent = "# ticketkanal";
                 cell.className = "empty" + (mainIndex + 1);
-                for (let index = 0; index < 4; index++) {
+                for (let index = 0; index < 5; index++) {
                     const cell = row.insertCell();
                     cell.className = "empty" + (mainIndex + 1);
                 }
