@@ -69,7 +69,7 @@ window.RememberPage = {
   handleHashChange() {
     const hash = window.location.hash.substring(1);
     if (hash) {
-      this.load(hash + ".html");
+      this.load("/sites/ticket/" + hash + ".html");
     }
   }
 };
