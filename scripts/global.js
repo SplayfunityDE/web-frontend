@@ -49,5 +49,28 @@ window.Global = {
         localStorage.getItem("jwt") ? localStorage.removeItem("jwt") : sessionStorage.removeItem("jwt");
         return response;
     }
+},
 
-}
+window.RememberPage = {
+  iframe: null,
+
+  init() {
+    this.iframe = document.querySelector("#contentFrame");
+    this.handleHashChange();
+    window.addEventListener("hashchange", () => this.handleHashChange());
+  },
+
+  load(file) {
+    if (this.iframe) {
+      this.iframe.src = file;
+    }
+  },
+
+  handleHashChange() {
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+      this.load(hash + ".html");
+    }
+  }
+};
+
