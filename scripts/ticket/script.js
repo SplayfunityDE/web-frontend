@@ -66,23 +66,8 @@ logoutLink.addEventListener("click", async () => {
     logoutLoader.style.opacity = "1";
     body.querySelector(".nav-bottom-link i").style.opacity = "0";
     body.querySelector(".nav-bottom-link span").style.opacity = "0";
-    localStorage.getItem("jwt") ? localStorage.removeItem("jwt") : sessionStorage.removeItem("jwt");
-        try {
-        const res = await fetch("https://api.splayfer.de/authentication/accounts/logout", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + token
-            }
-        });
-        if (!res.ok) {
-            throw new Error(`HTTP ${res.status}`);
-        }
-        window.location.href = '/sites/login.html';
-        console.log("ok");
-    } catch (error) {
-        window.top.location.href = '/sites/login.html';
-    }
+    const response = Global.logoutRequest();
+    window.location.href = '/sites/login.html';
 });
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -12,10 +12,12 @@ if (localStorage.getItem("darkmode") == "true") {
 
 document.addEventListener("DOMContentLoaded", () => {
     token = localStorage.getItem("jwt") ? localStorage.getItem("jwt") : sessionStorage.getItem("jwt");
-    fetchOffenCount();
-    fetchBearbeitungCount();
-    fetchArchiviertCount();
-    fetchGeschlssenCount();
+
+    fetchCount("open");
+    fetchCount("claimed");
+    fetchCount("archive");
+    fetchCount("closed");
+
     fetchTopicChart();
     fetchStatusChart();
     fetchActivityChart();
@@ -52,220 +54,99 @@ function updateChartColors() {
     }
 }
 
-async function fetchOffenCount() {
-    try {
-        const res = await fetch("https://api.splayfer.de/ticket/count/open", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + token
-            }
-        });
-    if (!res.ok) {
-        const error = new Error(`HTTP ${res.status}`);
-        error.status = res.status;
-        throw error;
-    }
-
-        const data = await res.text();
-
-        document.querySelector(".screen .numberOffen").innerHTML = data;
+async function fetchCount(type) {
+    const response = await Global.restRequest("https://api.splayfer.de/ticket/count/" + type, "GET", null);
+    if (response !== null) {
+        document.querySelector(".screen .number" + type).innerHTML = response;
         document.querySelector("#offenLoader").style.opacity = "0";
-
-    } catch (error) {
-        if(error.status == 403)
-            window.top.location.href = '/sites/login.html';
-    }
-}
-
-async function fetchBearbeitungCount() {
-    try {
-        const res = await fetch("https://api.splayfer.de/ticket/count/claimed", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + token
-            }
-        });
-    if (!res.ok) {
-        const error = new Error(`HTTP ${res.status}`);
-        error.status = res.status;
-        throw error;
-    }
-
-        const data = await res.text();
-
-        document.querySelector(".screen .numberBearbeitung").innerHTML = data;
-        document.querySelector("#bearbeitungLoader").style.opacity = "0";
-
-    } catch (error) {
-        if(error.status == 403)
-            window.top.location.href = '/sites/login.html';
-    }
-}
-
-async function fetchArchiviertCount() {
-    try {
-        const res = await fetch("https://api.splayfer.de/ticket/count/archive", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + token
-            }
-        });
-    if (!res.ok) {
-        const error = new Error(`HTTP ${res.status}`);
-        error.status = res.status;
-        throw error;
-    }
-
-        const data = await res.text();
-
-        document.querySelector(".screen .numberArchiviert").innerHTML = data;
-        document.querySelector("#archiviertLoader").style.opacity = "0";
-
-    } catch (error) {
-        if(error.status == 403)
-            window.top.location.href = '/sites/login.html';
-    }
-}
-
-async function fetchGeschlssenCount() {
-    try {
-        const res = await fetch("https://api.splayfer.de/ticket/count/closed", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + token
-            }
-        });
-    if (!res.ok) {
-        const error = new Error(`HTTP ${res.status}`);
-        error.status = res.status;  // 👈 speichere den Statuscode direkt im Error-Objekt
-        throw error;
-    }
-
-        const data = await res.text();
-
-        document.querySelector(".screen .numberGeschlossen").innerHTML = data;
-        document.querySelector("#geschlossenLoader").style.opacity = "0";
-
-    } catch (error) {
-        if(error.status == 403)
-            window.top.location.href = '/sites/login.html';
+    } else {
+        window.top.location.href = '/sites/login.html';
     }
 }
 
 async function fetchTopicChart() {
-    try {
-        const res = await fetch("https://api.splayfer.de/ticket/chart/topics", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + token
-            }
-        });
-    if (!res.ok) {
-        const error = new Error(`HTTP ${res.status}`);
-        error.status = res.status;  // 👈 speichere den Statuscode direkt im Error-Objekt
-        throw error;
-    }
-        const data = await res.json();
 
-        document.querySelector("#topicLoader").style.opacity = "0";
+    const response = await Global.restRequest("https://api.splayfer.de/ticket/chart/topics", "GET", null);
+    if (response === null)
+        return;
+    const data = response;
 
-        chart1 = new Chart(topic, {
-            type: 'doughnut',
-            data: {
-                labels: [
-                    'Allgemein',
-                    'Bug',
-                    'Report'
+    document.querySelector("#topicLoader").style.opacity = "0";
+
+    chart1 = new Chart(topic, {
+        type: 'doughnut',
+        data: {
+            labels: [
+                'Allgemein',
+                'Bug',
+                'Report'
+            ],
+            datasets: [{
+                label: 'Tickets',
+                data: [data["1"], data["2"], data["3"]],
+                borderAlign: "inner",
+                backgroundColor: [
+                    'rgb(141, 171, 186)',
+                    'rgb(235, 138, 138)',
+                    'rgb(250, 211, 117)'
                 ],
-                datasets: [{
-                    label: 'Tickets',
-                    data: [data["1"], data["2"], data["3"]],
-                    borderAlign: "inner",
-                    backgroundColor: [
-                        'rgb(141, 171, 186)',
-                        'rgb(235, 138, 138)',
-                        'rgb(250, 211, 117)'
-                    ],
-                    hoverOffset: 4,
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: "bottom"
-                    }
+                hoverOffset: 4,
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: "bottom"
                 }
             }
-        });
-        chart1.data.datasets[0].borderColor = getComputedStyle(body).getPropertyValue('--sidebar-color').trim();
-        chart1.update();
-    } catch (error) {
-        if(error.status == 403)
-            window.top.location.href = '/sites/login.html';
-    }
+        }
+    });
+    chart1.data.datasets[0].borderColor = getComputedStyle(body).getPropertyValue('--sidebar-color').trim();
+    chart1.update();
 }
 
 async function fetchStatusChart() {
     const bearbeiter = document.getElementById('bearbeiterChart');
 
-    try {
-        const res = await fetch("https://api.splayfer.de/ticket/chart/status", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + token
-            }
-        });
-    if (!res.ok) {
-        const error = new Error(`HTTP ${res.status}`);
-        error.status = res.status;  // 👈 speichere den Statuscode direkt im Error-Objekt
-        throw error;
-    }
-        const data = await res.json();
+    const response = await Global.restRequest("https://api.splayfer.de/ticket/chart/status", "GET", null);
+    if (response === null)
+        return;
+    const data = response;
 
-        document.querySelector("#bearbeiterLoader").style.opacity = "0";
+    document.querySelector("#bearbeiterLoader").style.opacity = "0";
 
-        chart2 = new Chart(bearbeiter, {
-            type: 'doughnut',
-            data: {
-                labels: [
-                    'In Bearbeitung',
-                    'Ausstehend'
+    chart2 = new Chart(bearbeiter, {
+        type: 'doughnut',
+        data: {
+            labels: [
+                'In Bearbeitung',
+                'Ausstehend'
+            ],
+            datasets: [{
+                label: 'Tickets',
+                data: [data.bearbeitung, data.offen],
+                borderAlign: "inner",
+                backgroundColor: [
+                    '#4b7a7e',
+                    '#74C2C4'
                 ],
-                datasets: [{
-                    label: 'Tickets',
-                    data: [data.bearbeitung, data.offen],
-                    borderAlign: "inner",
-                    backgroundColor: [
-                        '#4b7a7e',
-                        '#74C2C4'
-                    ],
-                    hoverOffset: 4,
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: "bottom"
-                    }
+                hoverOffset: 4,
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: "bottom"
                 }
             }
-        });
-        chart2.data.datasets[0].borderColor = getComputedStyle(body).getPropertyValue('--sidebar-color').trim();
-        chart2.update();
-    } catch (error) {
-        if(error.status == 403)
-            window.top.location.href = '/sites/login.html';
-    }
+        }
+    });
+    chart2.data.datasets[0].borderColor = getComputedStyle(body).getPropertyValue('--sidebar-color').trim();
+    chart2.update();
 }
 
 const irgendwas = document.getElementById('irgendwasChart');
@@ -307,76 +188,62 @@ chart3.update();
 async function fetchActivityChart() {
     const activity = document.getElementById('activityChart');
 
-    try {
-        const res = await fetch("https://api.splayfer.de/ticket/chart/activity", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + token
-            }
-        });
-    if (!res.ok) {
-        const error = new Error(`HTTP ${res.status}`);
-        error.status = res.status;  // 👈 speichere den Statuscode direkt im Error-Objekt
-        throw error;
-    }
-        const data = await res.json();
+    const response = await Global.restRequest("https://api.splayfer.de/ticket/chart/activity", "GET", null);
+    if (response === false)
+        return;
+    const data = response;
 
-        document.querySelector("#activityLoader").style.opacity = "0";
+    document.querySelector("#activityLoader").style.opacity = "0";
 
-        new Chart(activity, {
-            type: 'line',
-            data: {
-                labels: [
-                    'Vor 5 Wochen',
-                    'Vor 4 Wochen',
-                    'Vor 3 Wochen',
-                    'Vor 2 Wochen',
-                    'Letzte Woche',
-                    'Diese Woche'
+    new Chart(activity, {
+        type: 'line',
+        data: {
+            labels: [
+                'Vor 5 Wochen',
+                'Vor 4 Wochen',
+                'Vor 3 Wochen',
+                'Vor 2 Wochen',
+                'Letzte Woche',
+                'Diese Woche'
+            ],
+            datasets: [{
+                label: 'Tickets',
+                data: [
+                    data["5"] || 0,
+                    data["4"] || 0,
+                    data["3"] || 0,
+                    data["2"] || 0,
+                    data["1"] || 0,
+                    data["0"] || 0
                 ],
-                datasets: [{
-                    label: 'Tickets',
-                    data: [
-                        data["5"] || 0,
-                        data["4"] || 0,
-                        data["3"] || 0,
-                        data["2"] || 0,
-                        data["1"] || 0,
-                        data["0"] || 0
-                    ],
-                    fill: true,
-                    borderColor: 'rgb(141, 171, 186)',
-                    tension: 0.1,
-                    borderWidth: 3,
-                    pointStyle: "circle",
-                    pointHitRadius: 20,
-                    pointRadius: 4,
-                    pointBackgroundColor: 'rgb(141, 171, 186, 0.8)'
-                }]
+                fill: true,
+                borderColor: 'rgb(141, 171, 186)',
+                tension: 0.1,
+                borderWidth: 3,
+                pointStyle: "circle",
+                pointHitRadius: 20,
+                pointRadius: 4,
+                pointBackgroundColor: 'rgb(141, 171, 186, 0.8)'
+            }]
+        },
+        options: {
+            responsive: true,
+            aspectRatio: 4,
+            plugins: {
+                legend: {
+                    position: "none"
+                }
             },
-            options: {
-                responsive: true,
-                aspectRatio: 4,
-                plugins: {
-                    legend: {
-                        position: "none"
-                    }
-                },
-                scales: {
-                    y: {
-                        ticks: {
-                            beginAtZero: true,
-                            callback: function (value) {
-                                return Number.isInteger(value) ? value : '';
-                            }
+            scales: {
+                y: {
+                    ticks: {
+                        beginAtZero: true,
+                        callback: function (value) {
+                            return Number.isInteger(value) ? value : '';
                         }
                     }
                 }
             }
-        });
-    } catch (error) {
-        if(error.status == 403)
-            window.top.location.href = '/sites/login.html';
-    }
+        }
+    });
 }
