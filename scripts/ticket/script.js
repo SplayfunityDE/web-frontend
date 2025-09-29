@@ -47,7 +47,7 @@ navLinks.forEach(link => {
         const page = link.getAttribute("data-page");
         try {
             const response = await fetch(`/sites/ticket/${page}.html`);
-            RememberPage.load(page + ".html");
+            RememberPage.load("/sites/ticket/" + page + ".html");
             window.location.hash = page;
             //iframe.src = "/sites/ticket/" + page + ".html";
             if (innerWidth <= maxMobileWidth) { //close sidebar after click on mobile view
