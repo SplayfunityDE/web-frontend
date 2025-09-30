@@ -391,12 +391,12 @@ body.querySelector(".bar_open").addEventListener("click", async () => {
 body.querySelector(".bar_claim").addEventListener("click", async () => {
     for (element of selectedTickets) {
 
-        const infoRequest = await restRequest("https://api.splayfer.de/authentication/accounts" + localStorage.getItem("jwt") ? localStorage.removeItem("jwt") : sessionStorage.removeItem("jwt"), "GET", null);
+        const infoRequest = await Global.restRequest("https://api.splayfer.de/authentication/accounts" + localStorage.getItem("jwt") ? localStorage.removeItem("jwt") : sessionStorage.removeItem("jwt"), "GET", null);
         if (ticketRequest === false)
             return;
         var supporter = ticketRequest.discordUserId;
 
-        const claimRequest = await restRequest("https://api.splayfer.de/ticket/" + element, "PUT", {
+        const claimRequest = await Global.restRequest("https://api.splayfer.de/ticket/" + element, "PUT", {
             "supporter": supporter
         });
         if (claimRequest === false)
