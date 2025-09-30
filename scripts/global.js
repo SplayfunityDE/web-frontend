@@ -23,7 +23,8 @@ window.Global = {
                 return false;
             }
 
-            return response.json();
+            const text = await response.text();
+            return text ? JSON.parse(text) : null;
 
         } catch (error) {
             console.error("Fetch Fehler: ", error);

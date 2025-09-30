@@ -391,16 +391,14 @@ body.querySelector(".bar_open").addEventListener("click", async () => {
 body.querySelector(".bar_claim").addEventListener("click", async () => {
     for (element of selectedTickets) {
 
-        const infoRequest = await Global.restRequest("https://api.splayfer.de/authentication/accounts" + localStorage.getItem("jwt") ? localStorage.removeItem("jwt") : sessionStorage.removeItem("jwt"), "GET", null);
-        if (ticketRequest === false)
+        const infoRequest = await Global.restRequest("https://api.splayfer.de/authentication/accounts/" + (localStorage.getItem("jwt") ? localStorage.getItem("jwt") : sessionStorage.getItem("jwt")), "GET", null);
+        if (infoRequest === false)
             return;
-        var supporter = ticketRequest.discordUserId;
+        var supporter = infoRequest.discordUserId;
 
-        const claimRequest = await Global.restRequest("https://api.splayfer.de/ticket/" + element, "PUT", {
+        await Global.restRequest("https://api.splayfer.de/ticket/" + element, "PUT", {
             "supporter": supporter
         });
-        if (claimRequest === false)
-            return;
         console.log("Claimer erfolgreich geändert!");
     }
 });
