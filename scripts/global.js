@@ -73,5 +73,18 @@ window.RememberPage = {
       this.load("/sites/ticket/" + hash + ".html");
     }
   }
-};
+},
 
+window.PushMessage = {
+    push(message) {
+      var doc = window.parent.document;
+      doc.querySelector(".message").innerHTML = message;
+      doc.querySelector(".push_message").style.opacity = "1";
+      doc.querySelector(".push_message").style.bottom = "70px";
+
+      setTimeout(() => {
+      doc.querySelector(".push_message").style.opacity = "0";
+      doc.querySelector(".push_message").style.bottom = "-70px";
+      }, 5000);
+    }
+};

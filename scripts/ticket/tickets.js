@@ -400,5 +400,6 @@ body.querySelector(".bar_claim").addEventListener("click", async () => {
             "supporter": supporter
         });
         console.log("Claimer erfolgreich geändert!");
+        PushMessage.push("Claimer erfolgreich geändert!");
     }
 });
