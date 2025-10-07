@@ -20,6 +20,8 @@ window.Global = {
 
             if(!response.ok) {
                 console.error("HTTP Fehler:", response.status);
+                if (response.status === 403)
+                  window.top.location.href = '/sites/login.html';
                 return false;
             }
 
@@ -76,8 +78,11 @@ window.RememberPage = {
 },
 
 window.PushMessage = {
-    push(message) {
+    push(message, type) {
       var doc = window.parent.document;
+
+      doc.querySelector("#push_icons_" + type).style.opacity = "1";
+
       doc.querySelector(".message").innerHTML = message;
       doc.querySelector(".push_message").style.opacity = "1";
       doc.querySelector(".push_message").style.bottom = "70px";
@@ -85,6 +90,7 @@ window.PushMessage = {
       setTimeout(() => {
       doc.querySelector(".push_message").style.opacity = "0";
       doc.querySelector(".push_message").style.bottom = "-70px";
+      doc.querySelector("#push_icons_" + type).style.opacity = "0";
       }, 5000);
     }
 };

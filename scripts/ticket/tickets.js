@@ -195,9 +195,6 @@ async function fetchTable(searchPattern) {
             });
         });
 
-    } else {
-        //if (error.status == 403)
-            //window.top.location.href = '/sites/login.html';
     }
     isFetching = false;
     addCheckboxListeners();    
@@ -386,20 +383,25 @@ body.querySelector(".bar_open").addEventListener("click", async () => {
     selectedTickets.forEach(element => {
         window.open("https://discord.com/channels/873506353551925308/" + element);
     });
+    if (selectedTickets.length > 1)
+        PushMessage.push("Mehrere Tickets wurden in neuen Tabs geöffnet!", "alert");
+    else
+        PushMessage.push("Ein Ticket wurde in einem neuen Tab geöffnet!", "alert");
 });
 
 body.querySelector(".bar_claim").addEventListener("click", async () => {
     for (element of selectedTickets) {
 
         const infoRequest = await Global.restRequest("https://api.splayfer.de/authentication/accounts/" + (localStorage.getItem("jwt") ? localStorage.getItem("jwt") : sessionStorage.getItem("jwt")), "GET", null);
-        if (infoRequest === false)
+        if (infoRequest === false) {
+            PushMessage.push("Fehler beim Ändern des Claimers!", "error");
             return;
+        }
         var supporter = infoRequest.discordUserId;
 
         await Global.restRequest("https://api.splayfer.de/ticket/" + element, "PUT", {
             "supporter": supporter
         });
-        console.log("Claimer erfolgreich geändert!");
-        PushMessage.push("Claimer erfolgreich geändert!");
+        PushMessage.push("Claimer erfolgreich geändert!", "success");
     }
 });
