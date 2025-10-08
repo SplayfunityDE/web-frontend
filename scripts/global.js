@@ -22,7 +22,7 @@ window.Global = {
             if(!response.ok) {
                 console.error("HTTP Fehler:", response.status);
                 if (response.status === 403)
-                  //window.top.location.href = '/sites/login.html';
+                  window.top.location.href = '/sites/login.html';
                 return false;
             }
 
